@@ -12,6 +12,33 @@
     "slideshow_RykJMi": {
       "type": "slideshow",
       "blocks": {
+        "slider_item_C7kPpn": {
+          "type": "slider_item",
+          "settings": {
+            "image": "shopify://shop_images/1903_x_800_2_1.jpg",
+            "overlay_opacity": 0,
+            "slider_effect": "effect_fadeindown",
+            "subheading": "Subheading",
+            "heading": "Image slide",
+            "description": "<p>Tell your brand's story through images</p>",
+            "first_button_label": "Button label",
+            "first_button_link": "",
+            "first_button_style": false,
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_button_style": false,
+            "content_alignment": "left",
+            "content_position": "bottom-left",
+            "content_width": "container",
+            "content_max_width": 100,
+            "content_padding_block": 60,
+            "content_padding_inline": 30,
+            "show_content_background": false,
+            "content_background": "#ffffff",
+            "content_box_opacity": 100,
+            "content_alignment_mobile": "left"
+          }
+        },
         "slider_item_pULFaf": {
           "type": "slider_item",
           "settings": {
@@ -37,33 +64,6 @@
             "content_background": "#ffffff",
             "content_box_opacity": 100,
             "content_alignment_mobile": "center"
-          }
-        },
-        "slider_item_C7kPpn": {
-          "type": "slider_item",
-          "settings": {
-            "image": "shopify://shop_images/Cosmetic_Store_Skin_Care_Product_Promotion_Facebook_Ad_1.jpg",
-            "overlay_opacity": 0,
-            "slider_effect": "effect_fadeindown",
-            "subheading": "Subheading",
-            "heading": "Image slide",
-            "description": "<p>Tell your brand's story through images</p>",
-            "first_button_label": "Button label",
-            "first_button_link": "",
-            "first_button_style": false,
-            "second_button_label": "",
-            "second_button_link": "",
-            "second_button_style": false,
-            "content_alignment": "left",
-            "content_position": "bottom-left",
-            "content_width": "container",
-            "content_max_width": 100,
-            "content_padding_block": 60,
-            "content_padding_inline": 30,
-            "show_content_background": false,
-            "content_background": "#ffffff",
-            "content_box_opacity": 100,
-            "content_alignment_mobile": "left"
           }
         },
         "slider_item_zUbHYH": {
@@ -95,8 +95,8 @@
         }
       },
       "block_order": [
-        "slider_item_pULFaf",
         "slider_item_C7kPpn",
+        "slider_item_pULFaf",
         "slider_item_zUbHYH"
       ],
       "custom_css": [
