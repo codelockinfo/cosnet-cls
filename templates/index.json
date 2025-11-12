@@ -43,7 +43,7 @@
           "type": "slider_item",
           "settings": {
             "image": "shopify://shop_images/1903_x_800.jpg",
-            "overlay_opacity": 20,
+            "overlay_opacity": 0,
             "slider_effect": "effect_fadeinup",
             "subheading": "",
             "heading": "",
@@ -70,7 +70,7 @@
           "type": "slider_item",
           "settings": {
             "image": "shopify://shop_images/4.jpg",
-            "overlay_opacity": 20,
+            "overlay_opacity": 0,
             "slider_effect": "effect_fadeindown",
             "subheading": "",
             "heading": "",
