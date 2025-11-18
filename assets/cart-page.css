@@ -52,7 +52,7 @@ cart-remove-button .underline {
     gap: 5px;
   }
   .cart-item__details {
-    padding-bottom: 0;
+    padding-bottom: 0 !important;
   }
   .product-item__name {
     margin-left: 10px;
