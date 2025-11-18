@@ -36,7 +36,6 @@ cart-remove-button .underline {
 @media screen and (max-width: 767.98px) {
   .page__cart-item {
     /* display: grid; */
-    display: contents;
     padding-bottom: 2rem;
     margin-bottom: 2rem;
     border-bottom: 1px solid var(--color-border);
