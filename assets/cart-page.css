@@ -62,7 +62,7 @@ cart-remove-button .underline {
     margin-bottom: 0;
   }
   .page__cart-item td {
-    padding: 0;
+    padding: 14px 0;
     border: 0 !important;
   }
   .cart-item__media {
