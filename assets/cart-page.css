@@ -50,6 +50,7 @@ cart-remove-button .underline {
   .cart-item__details .cart_info {
     display: flex !important;
     gap: 5px;
+    padding-bottom: 0 !important;
   }
   .product-item__name {
     margin-left: 10px;
