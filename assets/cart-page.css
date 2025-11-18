@@ -55,7 +55,7 @@ cart-remove-button .underline {
     padding-bottom: 0 !important;
   }
   .cart-item__totals {
-    padding: 0;
+    padding: 0 !important;
   }
   .product-item__name {
     margin-left: 10px;
