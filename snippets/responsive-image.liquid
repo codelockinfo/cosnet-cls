@@ -94,7 +94,7 @@
   {%- endcapture -%}
 {% endif %}
 {% if image_mobile != blank %}
-  <picture class="image-picture-1 {{ class }}">
+  <picture class="image-picture {{ class }}">
     {%- liquid
       assign srcset_mobile = image_mobile | image_url: width: image_mobile.width | image_tag: widths: '480, 360', alt: image_alt | split: 'srcset="' | last
       unless srcset_mobile contains 'src='
