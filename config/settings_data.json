@@ -102,6 +102,7 @@
     "content_cookies": "<p>We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffics. By clicking \"<strong>Allow Cookies</strong>\" you consent to our use of cookie.</p>",
     "label_allow": "Allow Cookies",
     "label_refuse": "",
+    "text_terms_conditions": "<p> I agree with <a href=\"/policies/terms-of-service\" title=\"Terms of Service\"> Terms & Conditions </a></p>",
     "page_terms_conditions": "term-and-conditions",
     "button_animation": true,
     "rate_color": "#ea0606",
