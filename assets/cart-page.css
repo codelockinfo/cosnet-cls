@@ -57,11 +57,7 @@ cart-remove-button .underline {
   .cart-item__totals {
     padding: 0 !important;
   }
-  .product-item__name {
-    margin-left: 10px;
-  }
   .cart-item__price-wrapper {
-    margin-left: 10px;
     margin-top: 10px;
   }
   .page__cart-item:last-child {
@@ -69,6 +65,7 @@ cart-remove-button .underline {
   }
   .page__cart-item td {
     padding: 14px 0;
+    padding-right: 10px;
     border: 0 !important;
   }
   .cart-item__media {
