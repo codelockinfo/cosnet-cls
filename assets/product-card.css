@@ -425,6 +425,12 @@ media-gallery .external_video iframe model-viewer {
     align-items: center;
     line-height: 1;
   }
+  .product-item__price .card-product-price {
+    font-size: 14px;
+  }
+  .product-item__name {
+    font-size: 15px;
+  }
 }
 .product-single__information .product__badges {
   flex-direction: row;

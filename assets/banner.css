@@ -32,12 +32,7 @@
   .h-auto-banner-slider {
     height: auto !important;
   }
-  .product-item__price .card-product-price {
-    font-size: 14px;
-  }
-  .product-item__name {
-    font-size: 15px;
-  }
+  
 }
 
 .sec__content:not(.show-content-box):is(
