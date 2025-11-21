@@ -505,14 +505,14 @@ strong {
   height: 100%;
   object-fit: cover;
 }
-:where([style*="--aspect-ratio"] > :is(*:first-child, .secondary-image)),
-:where([style*="--aspect-ratio"]) > picture > * {
+.product-detail__media :where([style*="--aspect-ratio"] > :is(*:first-child, .secondary-image)),
+.product-detail__media :where([style*="--aspect-ratio"]) > picture > * {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  /* height: 100%;
-  object-fit: cover; */
+  height:  auto !important;
+  object-fit: cover;
 }
 [style*="--point"],
 [style*="--point"] :is(img, picture) {
