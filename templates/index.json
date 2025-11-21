@@ -702,7 +702,7 @@
         "show_image": true,
         "show_verified_buyer": true,
         "img_position": "left",
-        "image_ratio": "portrait",
+        "image_ratio": "square",
         "custom_ratio": "",
         "img_width": 38,
         "framed": true,
