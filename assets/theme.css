@@ -244,10 +244,10 @@ input[type="checkbox"]:checked + .checkmark:before {
   .hover-effect {
     will-change: transform;
   }
-  .hover-effect :is(img, .placeholder-image, picture) {
+  /* .hover-effect :is(img, .placeholder-image, picture) {
     transition: var(--transition);
     will-change: transform;
-  }
+  } */
   .hover_zoom .hover-effect:hover :is(img, .placeholder-image, picture) {
     transform: var(--zoom-transform, scale(1.05));
   }
