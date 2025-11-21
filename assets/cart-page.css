@@ -49,7 +49,7 @@ cart-remove-button .underline {
   }
   .cart-item__details .cart_info {
     display: flex !important;
-    gap: 5px;
+    justify-content: space-between;
   }
   .cart-item__details {
     padding: 20px 0 5px !important;
