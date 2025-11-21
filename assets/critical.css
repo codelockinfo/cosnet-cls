@@ -505,13 +505,6 @@ strong {
   height: 100%;
   object-fit: cover;
 }
-.rounded-style  :where([style*="--aspect-ratio"] > :is(*:first-child, .secondary-image)),
-.rounded-style  :where([style*="--aspect-ratio"]) > picture > * {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
 [style*="--point"],
 [style*="--point"] :is(img, picture) {
   object-position: var(--point);
