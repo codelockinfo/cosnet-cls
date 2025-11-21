@@ -783,7 +783,7 @@
         "header_size": "medium",
         "header_alignment": "center",
         "instagram_image_source": "generate_via_instagram_access_token",
-        "instagram_access_token": "https://www.instagram.com/cosnet.co.in",
+        "instagram_access_token": "https://www.instagramcom/cosnet.co.in",
         "show_instagram_profile": false,
         "instagram_profile_text": "Follow Us @cosnet",
         "instagram_profile_link": "https://www.instagram.com/cosnet.co.in",
