@@ -668,20 +668,20 @@
         "testimonials_items_3trnNN": {
           "type": "testimonials_items",
           "settings": {
-            "author_image": "shopify://shop_images/Ibiza-Time-Freezing-Face-Serum-6.webp",
+            "author_image": "shopify://shop_images/00_8dec967b-dcc9-45dc-959e-dc8d49106665.jpg",
             "author_rating": 5,
             "author_text": "<p>A fantastic purchase! The product provides just the right amount of warmth without causing overheating. Highly recommend! 😊</p>",
-            "select_product": "pilgrim-10-vitamin-c-face-serum-for-daily-brightness",
+            "select_product": "2-kojic-acid",
             "author_name": "Algistino Lionel."
           }
         },
         "testimonials_items_xDzhkj": {
           "type": "testimonials_items",
           "settings": {
-            "author_image": "shopify://shop_images/8809032672979.1-thumbnail-1080x1080-70.jpg",
+            "author_image": "shopify://shop_images/00_7182da92-64fd-45ce-b2f2-fe342770f03a.jpg",
             "author_rating": 5,
             "author_text": "<p>These are sooo pretty and very comfy. Perfect color as well. I love wearing these with a neutral top and Chelsea boots. Wicked cute...😍</p>",
-            "select_product": "lemon-verbena-body-wash",
+            "select_product": "ferulic-acid-vitamin-c-e",
             "author_name": "Carie-Gosée H."
           }
         }
