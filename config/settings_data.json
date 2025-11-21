@@ -57,7 +57,7 @@
     "price_size": 16,
     "show_vendor": false,
     "show_secondary_image": true,
-    "product_image_ratio": "adapt",
+    "product_image_ratio": "portrait",
     "product_custom_ratio": "2:3",
     "product_hover_effect": "hover_right",
     "show_action_on_mobile": true,
