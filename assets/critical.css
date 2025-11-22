@@ -505,7 +505,7 @@ strong {
   height: 100%;
   object-fit: cover;
 }
- .product :where([style*="--aspect-ratio"] > :is(*:first-child, .secondary-image)),
+ .product:where([style*="--aspect-ratio"] > :is(*:first-child, .secondary-image)),
 .product:where([style*="--aspect-ratio"]) > picture > * {
   position: absolute;
   top: 0;
