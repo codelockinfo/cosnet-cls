@@ -85,7 +85,7 @@
           "type": "categories",
           "settings": {
             "title": "Products Category",
-            "menu": "collection-top"
+            "menu": ""
           }
         },
         "filter_giBtHK": {
@@ -99,21 +99,12 @@
             "collection": "t-shirts",
             "items_to_show": 3
           }
-        },
-        "image_banner_UUJxtT": {
-          "type": "image_banner",
-          "settings": {
-            "image": "shopify://shop_images/fs_category.jpg",
-            "url": "shopify://collections",
-            "open_link": true
-          }
         }
       },
       "block_order": [
         "categories_LYDr6p",
         "filter_giBtHK",
-        "popular_product_Xwjqcf",
-        "image_banner_UUJxtT"
+        "popular_product_Xwjqcf"
       ],
       "settings": {
         "section_width": "fluid_container",
