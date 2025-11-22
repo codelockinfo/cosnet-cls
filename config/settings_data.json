@@ -52,6 +52,7 @@
     "sold_out_background": "#666666",
     "custom_badge_background": "#14854e",
     "product_style": "card",
+    "show_compare": false,
     "product_alignment": "start",
     "product_size": 16,
     "price_size": 16,
