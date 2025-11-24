@@ -43,7 +43,7 @@
         "slider_item_pULFaf": {
           "type": "slider_item",
           "settings": {
-            "image": "shopify://shop_images/2_e0b39b2f-71d5-41d9-accc-c8b366741b48.jpg",
+            "image": "shopify://shop_images/2_1.jpg",
             "image_mobile": "shopify://shop_images/Banner_mobile_view_2_new.jpg",
             "overlay_opacity": 0,
             "slider_effect": "effect_fadeinup",
@@ -71,7 +71,7 @@
         "slider_item_zUbHYH": {
           "type": "slider_item",
           "settings": {
-            "image": "shopify://shop_images/4_e278163e-b5be-492c-a939-7a74b0daede9.jpg",
+            "image": "shopify://shop_images/3_65e886ee-ded5-4e10-afc9-363240a77388.jpg",
             "image_mobile": "shopify://shop_images/Banner_mobile_view_3_new.jpg",
             "overlay_opacity": 0,
             "slider_effect": "effect_fadeindown",
@@ -99,7 +99,7 @@
         "slider_item_AGzwmF": {
           "type": "slider_item",
           "settings": {
-            "image": "shopify://shop_images/3.jpg",
+            "image": "shopify://shop_images/4_1.jpg",
             "image_mobile": "shopify://shop_images/Banner_mobile_view_4_new.jpg",
             "overlay_opacity": 0,
             "slider_effect": "effect_fadeindown",
@@ -127,7 +127,7 @@
         "slider_item_wM7wgG": {
           "type": "slider_item",
           "settings": {
-            "image": "shopify://shop_images/11_16392be5-6d01-4626-847c-787677cbf3ff.jpg",
+            "image": "shopify://shop_images/5_1.jpg",
             "image_mobile": "shopify://shop_images/Banner_mobile_view_4_new_size.jpg",
             "overlay_opacity": 0,
             "slider_effect": "effect_fadeindown",
