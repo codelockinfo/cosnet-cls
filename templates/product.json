@@ -316,7 +316,7 @@
             "review_data": "no_reviews",
             "max_width": 1200,
             "show_shop_reviews": false,
-            "empty_state": "empty_widget"
+            "empty_state": "hide_widget"
           }
         },
         "judge_me_reviews_preview_badge_C9F6rH": {
