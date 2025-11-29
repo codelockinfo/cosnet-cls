@@ -60,7 +60,7 @@
     "show_rate": true,
     "show_secondary_image": true,
     "product_image_ratio": "custom",
-    "product_custom_ratio": "2:2",
+    "product_custom_ratio": "2:3",
     "product_hover_effect": "hover_right",
     "show_action_on_mobile": true,
     "enable_color_swatches": true,
