@@ -108,6 +108,7 @@
         },
         "kwik_cod_checkout_buy_now_button_DgGEBb": {
           "type": "shopify://apps/kwik-cod-checkout/blocks/buy_now_button/74f36c20-677c-4aa2-b179-1769aa61abaa",
+          "disabled": true,
           "settings": {
             "gkc_button_text": "Buy Now",
             "gkc_button_subtext": "",
@@ -118,7 +119,6 @@
         },
         "buy_buttons_LcQGtR": {
           "type": "buy_buttons",
-          "disabled": true,
           "settings": {
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true,
