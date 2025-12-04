@@ -49,7 +49,7 @@
             {% comment %} add gift card recipient form {% endcomment %}
             {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
           {%- endif -%}
-          <div class="product-form__buttons btn-large flex flex-wrap gap-10" style="display:none;">
+          <div class="product-form__buttons btn-large flex flex-wrap gap-10">
             <div class="product__submit-form-cart flex flex-wrap gap-10 gap-lg-20 align-center grow-1">
               <label class="btn-text-transform heading-color mb-0 visually-hidden" for="Quantity-{{ section.id }}">
                 {{- 'products.product.quantity.label' | t -}}
