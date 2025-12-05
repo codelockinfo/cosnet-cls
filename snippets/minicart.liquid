@@ -315,7 +315,7 @@
                 </span>
               </div>
               {%- if theme_st.show_check_box_in_cart and theme_st.enable_catalog_mode == false -%}
-                <terms-conditions class="terms-conditions flex mt-17 mb-25" data-custom-class="term-and-condition">
+                <terms-conditions class="terms-conditions flex mt-17 mb-25" data-custom-class="term-and-condition" style="display:none">
                   <div class="checkbox-group relative">
                     <input
                       class="input w-20 h-20 m-0 opacity-0 absolute inset-0 pointer conditions_form_minicart"
@@ -346,12 +346,81 @@
                   class="btn-primary w-full btn-checkout"
                   name="checkout"
                   form="minicart"
+                  style="display:none"
                   {% if theme_st.show_check_box_in_cart %}
                     disabled
                   {% endif %}
                 >
                   <span>{{ 'general.cart.checkout' | t }}</span>
                 </button>
+                <div id="shopify-block-AVTFEMHFIR2QvNUZCW__kwik_cod_checkout_checkout_button_GUbNFT" class="shopify-block shopify-app-block"><button type="button" class="gokwik-checkout-button" onclick="initiateLogin()" style="background-color: #000000; color: #ffffff;" 
+                
+  <span class="btn-text">
+    <span>Checkout Now</span>
+    
+      <span></span>
+    
+  </span>
+  <span class="pay-opt-icon">
+    
+      <img src="https://cdn.gokwik.co/v4/images/upi-icons.svg" alt="Payment Icons">
+    
+  </span>
+</button>
+
+
+
+<style>
+  .gokwik-checkout-button {
+    padding: 12px 1rem;
+    width: 100%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+  }
+
+  .gokwik-checkout-button:hover {
+    transform: scale(1.02);
+  }
+
+  .gokwik-checkout-button:focus {
+    outline: 1px solid #ffffff;
+    outline-offset: 2px;
+  }
+
+  .gokwik-checkout-button:active {
+    transform: scale(0.98);
+  }
+
+  .btn-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-text > span:last-child {
+    padding-top: 2px;
+    font-size: 10px;
+    line-height: 10px;
+    text-transform: initial;
+  }
+
+  .btn-text > span:first-child {
+    font-size: 16px;
+  }
+
+  .pay-opt-icon img:first-child {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+</style>
+</div>
               {%- endif -%}
             </div>
           </div>
