@@ -74,6 +74,7 @@
     "show_message_when_remove": true,
     "action_after_add_cart": "open_drawer",
     "free_shipping_minimum": "150",
+    "enable_cart_note": false,
     "choose_gift_wrap_product": "digital-gift-card",
     "product_recommendations_heading": "You may also like...",
     "minicart_type": "show_inside",
@@ -84,6 +85,7 @@
       "flowing-parka",
       "high-neck-jumper"
     ],
+    "show_estimate_shipping_rates": false,
     "facebook": "https://www.facebook.com/share/1ANAPNbND1/",
     "instagram": "https://www.instagram.com/cosnet.co.in",
     "twitter": "",
