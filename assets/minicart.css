@@ -319,3 +319,23 @@ body .dmp_discount-form input {
 .gift_card_product.open{
   pointer-events: none
 }
+.btn-checkout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.btn-checkout .checkout-text {
+  flex-shrink: 0;
+}
+.btn-checkout .pay-opt-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.btn-checkout .pay-opt-icon img {
+  display: block;
+  height: auto;
+  max-height: 25px;
+  width: auto;
+}
