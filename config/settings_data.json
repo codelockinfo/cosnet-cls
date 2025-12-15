@@ -80,10 +80,11 @@
     "minicart_type": "show_inside",
     "show_on_cart_page": true,
     "select_product_recommendations": [
-      "belted-blazer-dress",
-      "cropped-denim-shirt",
-      "flowing-parka",
-      "high-neck-jumper"
+      "02-salicylic-acid",
+      "10-niacinamide-with-1-zinc-pca",
+      "15-l-ascorbic-acid-vitamin-c",
+      "2-kojic-acid",
+      "ferulic-acid-vitamin-c-e"
     ],
     "show_estimate_shipping_rates": false,
     "facebook": "https://www.facebook.com/share/1ANAPNbND1/",
