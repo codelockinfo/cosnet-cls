@@ -635,6 +635,20 @@
                           </button>
                           <button
                             tabindex="0"
+                            aria-label="WhatsApp"
+                            class="no-js-hidden relative w-40 h-40 btn-reset inline-flex heading-color content-center tooltip"
+                            onclick="window.open('https://wa.me/?text='+encodeURIComponent(location.href), 'whatsapp-share-dialog', 'width=436,height=436'); return false;"
+                          >
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                              <circle cx="20" cy="20" r="19.5" stroke="currentColor"/>
+                              <path fill="currentColor" d="M20 10c-5.523 0-10 4.477-10 10 0 1.77.46 3.43 1.27 4.88L10 30l5.32-1.12c1.42.78 3.02 1.24 4.68 1.24 5.523 0 10-4.477 10-10S25.523 10 20 10zm0 18.33c-1.38 0-2.74-.36-3.93-1.04l-.28-.16-2.9.61.62-2.83-.16-.28c-.7-1.2-1.07-2.57-1.07-3.97 0-4.58 3.73-8.31 8.31-8.31 2.22 0 4.31.86 5.88 2.43a8.25 8.25 0 0 1 2.43 5.88c0 4.58-3.73 8.31-8.31 8.31zm4.56-6.2c-.25-.13-1.47-.73-1.7-.81-.23-.09-.4-.13-.56.13-.17.25-.65.81-.8.98-.14.17-.29.19-.54.07-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.32-.02-.44-.07-.13-.56-1.35-.77-1.85-.2-.5-.4-.43-.56-.44-.14 0-.3-.01-.46-.01-.17 0-.45.07-.69.33-.24.27-.93.91-.93 2.22 0 1.31.95 2.57 1.08 2.75.13.18 1.86 2.84 4.51 3.98.63.28 1.12.45 1.5.58.63.21 1.2.18 1.65.11.5-.08 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.25-.16-.5-.29z"/>
+                            </svg>
+                            <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-top">
+                              WhatsApp
+                            </span>
+                          </button>
+                          <button
+                            tabindex="0"
                             aria-label="{{ 'general.social.links.twitter' | t }}"
                             class="no-js-hidden relative w-40 h-40 btn-reset inline-flex heading-color content-center tooltip"
                             onclick="window.open('http://twitter.com/home/?status='+encodeURIComponent(location.href), 'twitter-share-dialog', 'width=436,height=436'); return false;"
