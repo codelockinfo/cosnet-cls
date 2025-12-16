@@ -228,6 +228,170 @@
           </div>
         {%- endform -%}
       </product-form>
+      {%- comment -%} Discount Coupons Section {%- endcomment -%}
+      {%- if product.metafields.custom.discount != blank -%}
+        {%- assign discount_coupons = product.metafields.custom.discount.value -%}
+        {%- assign discount_types = product.metafields.custom.discount_type.value -%}
+        {%- if discount_coupons.size > 0 -%}
+          <div class="product-discount-coupons mt-20">
+            <style>
+              .discount-coupon-card {
+                background: #f5f5f5;
+                border-radius: 8px;
+                padding: 20px;
+                min-width: 280px;
+                max-width: 320px;
+                position: relative;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: 1px solid #e0e0e0;
+              }
+              .discount-coupon-card:hover {
+                border-color: var(--color-primary, #000);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+              }
+              .discount-type {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+              }
+              .discount-icon {
+                width: 40px;
+                height: 40px;
+                background: #333;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 12px;
+              }
+              .discount-title {
+                font-size: 18px;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 8px;
+                text-transform: uppercase;
+                line-height: 1.3;
+              }
+              .discount-description {
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 12px;
+                line-height: 1.4;
+              }
+              .discount-separator {
+                border-top: 1px dashed #ccc;
+                margin: 12px 0;
+              }
+              .discount-code-section {
+                font-size: 14px;
+                color: #333;
+                margin-top: 8px;
+              }
+              .discount-code-label {
+                font-weight: 500;
+              }
+              .discount-code-value {
+                text-decoration: underline;
+                font-weight: 600;
+                margin-left: 4px;
+              }
+            </style>
+            <div class="flex flex-wrap gap-15">
+              {%- for coupon in discount_coupons -%}
+                {%- liquid
+                  assign coupon_code = ''
+                  assign coupon_description = ''
+                  assign coupon_type = ''
+                  assign coupon_icon = '%'
+                  assign forloop_index0 = forloop.index0
+                  
+                  if coupon.code != blank
+                    assign coupon_code = coupon.code
+                  elsif coupon != blank
+                    assign coupon_code = coupon
+                  endif
+                  
+                  if coupon.description != blank
+                    assign coupon_description = coupon.description
+                  endif
+                  
+                  if discount_types != blank
+                    if discount_types[forloop_index0] != blank
+                      assign coupon_type = discount_types[forloop_index0]
+                    elsif discount_types != blank
+                      assign coupon_type = discount_types
+                    endif
+                  endif
+                  
+                  if coupon_type != blank
+                    assign coupon_type_lower = coupon_type | downcase
+                    if coupon_type_lower contains 'prepaid'
+                      assign coupon_icon = '🏦'
+                    elsif coupon_type_lower contains 'free shipping' or coupon_type_lower contains 'freeshipping'
+                      assign coupon_icon = '🚚'
+                    else
+                      assign coupon_icon = '%'
+                    endif
+                  endif
+                -%}
+                {%- if coupon_code != blank -%}
+                  <div class="discount-coupon-card" onclick="copyCouponCode(this)" data-discount-code="{{ coupon_code }}">
+                  <div class="discount-type">
+                    <div class="discount-icon">
+                      <span class="discount-icon-text">{{ coupon_icon }}</span>
+                    </div>
+                    {%- if coupon_type != blank -%}
+                      <div class="discount-title">{{ coupon_type | upcase }}</div>
+                    {%- else -%}
+                      <div class="discount-title">DISCOUNT</div>
+                    {%- endif -%}
+                  </div>
+                    {%- if coupon_description != blank -%}
+                      <div class="discount-description">{{ coupon_description }}</div>
+                    {%- else -%}
+                      <div class="discount-description">Use this code at checkout</div>
+                    {%- endif -%}
+                    <div class="discount-separator"></div>
+                    <div class="discount-code-section">
+                      {%- if coupon_code != blank and coupon_code != 'At checkout' -%}
+                        <span class="discount-code-label">Code:</span>
+                        <span class="discount-code-value coupon-code" data-code="{{ coupon_code }}">{{ coupon_code }}</span>
+                      {%- else -%}
+                        <span class="discount-code-value">At checkout</span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+          <script>
+            function copyCouponCode(element) {
+              const codeElement = element.querySelector('.coupon-code');
+              if (!codeElement) return;
+              
+              const code = codeElement.getAttribute('data-code') || codeElement.textContent.trim();
+              if (!code || code === 'At checkout') return;
+              
+              navigator.clipboard.writeText(code).then(function() {
+                const originalText = codeElement.textContent;
+                codeElement.textContent = 'Copied!';
+                codeElement.style.color = 'var(--color-primary, #000)';
+                setTimeout(function() {
+                  codeElement.textContent = originalText;
+                  codeElement.style.color = '#333';
+                }, 2000);
+              }).catch(function(err) {
+                console.error('Failed to copy coupon code:', err);
+              });
+            }
+          </script>
+        {%- endif -%}
+      {%- endif -%}
     </div>
   {% endif %}
 
