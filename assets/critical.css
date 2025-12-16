@@ -198,7 +198,7 @@ video {
   background: var(--grey-color);
   --input-bg: var(--color-white);
 }
-:where(
+/* :where(
     .heading-color,
     .hover-heading-color:hover,
     [aria-current="true"],
@@ -206,7 +206,7 @@ video {
   ),
 a.hover-heading-color:hover {
   color: var(--color-heading);
-}
+} */
 
 :where(.heading-style) {
   font-family: var(--heading-font);
