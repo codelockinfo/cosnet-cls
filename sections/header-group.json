@@ -25,8 +25,8 @@
           "type": "text_slider",
           "settings": {
             "text1": "Sign up for 10% off your first order. <a href=\"/account/\" title=\"/account/\"><span style=\"text-decoration:underline\"><strong>Sign Up</strong></span></a>",
-            "text2": "<a href=\"/collections/crop-top\" title=\"Crop-top\">Summer</a> sale discount off 50%. <a href=\"/collections/all\" title=\"All products\"><span style=\"text-decoration:underline\"><strong>Shop Sale</strong></span></a>",
-            "text3": "<a href=\"/collections/sweaters\" title=\"Sweaters\">Coats—every</a> friday 75% Off . <a href=\"/collections/all\" title=\"All products\"><span style=\"text-decoration:underline\"><strong>Shop Sale</strong></span></a>",
+            "text2": "",
+            "text3": "",
             "change_every": 3,
             "hidden_on_mobile": false,
             "text_slider_center": true
