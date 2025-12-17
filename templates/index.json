@@ -579,7 +579,7 @@
             "first_button_link": "shopify://pages/about-us",
             "first_button_type": "outline",
             "second_button_label": "New Arrivals",
-            "second_button_link": "shopify://collections",
+            "second_button_link": "shopify://collections/eye",
             "second_button_type": "primary",
             "spacing_bottom": 0
           }
