@@ -459,8 +459,8 @@
           {%- when 'popular_product' -%}
             <div
               {{ block.shopify_attributes }}
-              class="filter-item {% if enable_filtering and filter_layout == 'drawer' %} px-30{% else %} px-30 px-1025-0{% endif %}"
-            >
+              class="filter-item{% if enable_filtering and filter_layout == 'drawer' %} px-30{% else %} px-30 px-1025-0{% endif %}"
+             >
               {%- assign collection = collections[block_st.collection] -%}
               <collapsible-block class="collection {% if first_block and active_filter contains "active" and filter_layout != 'horizontal' %} active {% endif %} {% if enable_filtering and filter_layout != 'horizontal' and default_filter != "first_open" %} {{ active_filter }} {% endif %} border-bottom block pb-5{% if enable_filtering and filter_layout == 'horizontal' %} relative border-1025-bottom-0 pb-1025-0{% endif %}">
                 <h3 class="collapsible-heading w-full relative my-0{% if enable_filtering and filter_layout != 'horizontal' %} heading-letter-spacing h5 pt-25 pb-20{% else %} heading-style pt-25 pb-20 text-size py-1025-15 px-1025-25 inline-flex gap-10 align-center justify-between border-1025 pointer transition rounded-5{% endif %}">
@@ -486,19 +486,23 @@
                     class="list list-view-items mb-5 custom-scrollbar featured-product products-list__column-items flex flex-column gap-20"
                     style="--rounded-radius: 5px;"
                   >
-                    {%- for product in collection.products limit: block_st.items_to_show -%}
-                      {% render 'product-item',
-                        card_product: product,
-                        template_enable_price: true,
-                        template_enable_add_cart: false,
-                        template_enable_product_vendor: false,
-                        template_enable_rate: true,
-                        template_enable_product_short_description: false,
-                        template_enable_color_swatches: false,
-                        type: 'list',
-                        sizes: '80px'
-                      %}
-                    {%- endfor -%}
+                    {%- if collection != blank and collection.products.size > 0 -%}
+                      {%- for product in collection.products limit: block_st.items_to_show -%}
+                        {% render 'product-item',
+                          card_product: product,
+                          template_enable_price: true,
+                          template_enable_add_cart: false,
+                          template_enable_product_vendor: false,
+                          template_enable_rate: true,
+                          template_enable_product_short_description: false,
+                          template_enable_color_swatches: false,
+                          type: 'list',
+                          sizes: '80px'
+                        %}
+                      {%- endfor -%}
+                    {%- else -%}
+                      <p class="text-center heading-color">No featured products are available!</p>
+                    {%- endif -%}
                   </div>
                 </div>
               </collapsible-block>

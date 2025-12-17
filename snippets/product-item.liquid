@@ -282,7 +282,7 @@
                 {% endif %}
                 <button-wishlist
                   tabindex="0"
-                  class="product-item__button pointer product-item__button-wishlist tooltip btn-hover transition btn-hover transition shadow btn-action rounded-50 p-0 border w-40 h-40 inline-flex content-center absolute top-10 top-1025-15{% if enable_rtl %} left-10 left-1025-15{% else %} right-10 right-1025-15{% endif %}"
+                  class="product-item__button wishListRemove pointer product-item__button-wishlist tooltip btn-hover transition btn-hover transition shadow btn-action rounded-50 p-0 border w-40 h-40 inline-flex content-center absolute top-10 top-1025-15{% if enable_rtl %} left-10 left-1025-15{% else %} right-10 right-1025-15{% endif %}"
                   data-product-id="{{ card_product.id }}"
                   data-action="{{ action_when_click_added_wishlist }}"
                   data-tooltip-remove="{{ 'products.product.actions.wishlist.remove' | t }}"
@@ -310,7 +310,7 @@
                         {% endif %}
                         <button-wishlist
                           tabindex="0"
-                          class="product-item__button pointer product-item__button-wishlist tooltip relative btn-hover transition btn-hover transition btn-action rounded-50 p-0 shadow w-40 h-40 inline-flex content-center"
+                          class="product-item__button pointer product-item__button-wishlist wishlistButtonOnWishlistPage tooltip relative btn-hover transition btn-hover transition btn-action rounded-50 p-0 shadow w-40 h-40 inline-flex content-center"
                           data-product-id="{{ card_product.id }}"
                           data-action="{{ action_when_click_added_wishlist }}"
                           data-tooltip-remove="{{ 'products.product.actions.wishlist.remove' | t }}"

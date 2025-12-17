@@ -68,7 +68,7 @@
                       </span>
                       {% render 'icon-minus' %}
                     </button>
-                    <label class="visually-hidden" for="quantity">
+                    <label class="visually-hidden" for="Quantity-{{ product_form_id }}">
                       {{ 'general.cart.headings.quantity' | t }}
                     </label>
                     <input
@@ -83,7 +83,8 @@
                       step="{{ product.selected_or_first_available_variant.quantity_rule.increment | default: '1' }}"
                       value="{{ product.selected_or_first_available_variant.quantity_rule.min | default: '1' }}"
                       form="{{ product_form_id }}"
-                      id="quantity"
+                      id="Quantity-{{ product_form_id }}"
+                      data-product-id="{{ product.id }}"
                     >
                     <button
                       class="quantity__button inline-flex content-center pointer border-0 no-js-hidden w-custom grey-bg"
@@ -137,7 +138,7 @@
               {% endif %}
               <button-wishlist
                 tabindex="0"
-                class="product-item__button pointer product-item__button-wishlist tooltip relative btn-hover transition btn-hover transition bg-white rounded-50 border w-50 h-50 inline-flex content-center skeleton-loading"
+                class="product-item__button wishListOnPop-up pointer product-item__button-wishlist tooltip relative btn-hover transition btn-hover transition bg-white rounded-50 border w-50 h-50 inline-flex content-center skeleton-loading"
                 data-product-id="{{ product.id }}"
                 data-action="{{ action_when_click_added_wishlist }}"
                 data-tooltip-remove="{{ 'products.product.actions.wishlist.remove' | t }}"
