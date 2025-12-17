@@ -75,7 +75,7 @@
           "settings": {
             "image": "shopify://shop_images/3_65e886ee-ded5-4e10-afc9-363240a77388.jpg",
             "image_mobile": "shopify://shop_images/4_2fb5b790-4e22-440f-b7e4-070486c2a532.jpg",
-            "image_link": "",
+            "image_link": "shopify://products/2-kojic-acid",
             "overlay_opacity": 0,
             "slider_effect": "effect_fadeindown",
             "subheading": "",
