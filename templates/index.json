@@ -18,6 +18,7 @@
             "image": "shopify://shop_images/1_4.jpg",
             "image_mobile": "shopify://shop_images/1_77c09234-d49c-4bb1-aa74-f6bec47f044e.jpg",
             "image_link": "shopify://products/hair-serum",
+            "image_link": "shopify://products/hair-serum",
             "overlay_opacity": 0,
             "slider_effect": "effect_fadeindown",
             "subheading": "",
@@ -46,6 +47,7 @@
           "settings": {
             "image": "shopify://shop_images/2_1.jpg",
             "image_mobile": "shopify://shop_images/2_c95a4f7d-83ae-4517-958a-83e922e06192.jpg",
+            "image_link": "shopify://products/02-salicylic-acid",
             "image_link": "shopify://products/02-salicylic-acid",
             "overlay_opacity": 0,
             "slider_effect": "effect_fadeinup",
@@ -600,6 +602,7 @@
         "section_width": "full_width",
         "color_scheme": "scheme-3d10de96-a479-49bd-819c-e044746b4f3e",
         "image": "shopify://shop_images/10_7349a722-e600-4da3-9c18-6ee26ea1745d.jpg",
+        "image_link": "",
         "image_link": "",
         "image_behavior": "fixed",
         "overlay_opacity": 50,
