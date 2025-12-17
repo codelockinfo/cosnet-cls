@@ -46,7 +46,7 @@
           "settings": {
             "image": "shopify://shop_images/2_1.jpg",
             "image_mobile": "shopify://shop_images/2_c95a4f7d-83ae-4517-958a-83e922e06192.jpg",
-            "image_link": "",
+            "image_link": "shopify://products/02-salicylic-acid",
             "overlay_opacity": 0,
             "slider_effect": "effect_fadeinup",
             "subheading": "",
