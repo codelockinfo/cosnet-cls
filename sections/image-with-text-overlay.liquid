@@ -8,6 +8,7 @@
   endif
   assign image = section_st.image
   assign image_mobile = section_st.image_mobile | default: image
+  assign image_link = section_st.image_link
   assign scroll_animation = settings.scroll_animation
 -%}
 {%- capture style -%}
@@ -50,7 +51,8 @@
             container: section_width,
             image: image,
             image_mobile: image_mobile,
-            image_alt: image_alt
+            image_alt: image_alt,
+            link: image_link
           %}
         {%- else -%}
           {%- render 'placeholder-render', class: 'absolute inset-0 w-full h-full object-fit-cover' -%}
@@ -276,6 +278,11 @@
       "type": "image_picker",
       "id": "image_mobile",
       "label": "t:sections.all.image.mobile_image.label"
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "Image link"
     },
     {
       "type": "select",
