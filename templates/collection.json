@@ -96,8 +96,8 @@
           "type": "popular_product",
           "settings": {
             "title": "Featured product",
-            "collection": "t-shirts",
-            "items_to_show": 3
+            "collection": "cleansers",
+            "items_to_show": 5
           }
         }
       },
