@@ -96,7 +96,7 @@
           "type": "popular_product",
           "settings": {
             "title": "Featured product",
-            "collection": "cleansers",
+            "collection": "",
             "items_to_show": 5
           }
         }
