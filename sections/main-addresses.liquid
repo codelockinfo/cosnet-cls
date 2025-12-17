@@ -173,7 +173,9 @@
           </div>
         </div>
         <div class="bls__addreses-default mt-60">
-          <h3 class="mb-5 title-default">{{ 'customer.addresses.default' | t }}</h3>
+        {% if customer.addresses.size > 0 %}
+            <h3 class="mb-5 title-default">{{ 'customer.addresses.default' | t }}</h3>
+        {% endif %}
           <div class="bls_addreses-info-details row">
             {% for address in customer.addresses %}
               <div class="bls-customer__address-info mt-15 col-lg-6">

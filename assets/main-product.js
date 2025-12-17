@@ -1063,16 +1063,67 @@ BlsDropDownProduct.innit();
 var SyncQuantityInput = (() => {
   return {
     init: () => {
-      const syncInputs = document.querySelectorAll(
-        ".product-detail__buy-buttons input.quantity-input"
-      );
-      syncInputs.forEach((input) => {
-        input.addEventListener("change", function () {
-          const value = this.value;
-          syncInputs.forEach((otherInput) => {
-            if (otherInput !== input) {
+      // Function to sync quantity inputs
+      const syncQuantity = (changedInput) => {
+        const value = changedInput.value;
+        const productId = changedInput.getAttribute('data-product-id');
+        
+        if (productId) {
+          // Sync all other quantity inputs with the same product ID
+          const allInputs = document.querySelectorAll(
+            `input.quantity-input[data-product-id="${productId}"]`
+          );
+          allInputs.forEach((otherInput) => {
+            if (otherInput !== changedInput) {
               otherInput.value = value;
+              // Trigger change event to update the quantity-input custom element
+              otherInput.dispatchEvent(new Event('change', { bubbles: true }));
             }
+          });
+        } else {
+          // Fallback: sync all inputs in product-detail__buy-buttons
+          const fallbackInputs = document.querySelectorAll(
+            ".product-detail__buy-buttons input.quantity-input"
+          );
+          fallbackInputs.forEach((otherInput) => {
+            if (otherInput !== changedInput) {
+              otherInput.value = value;
+              otherInput.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          });
+        }
+      };
+      
+      // Sync all quantity inputs for the same product
+      const syncInputs = document.querySelectorAll(
+        "input.quantity-input"
+      );
+      
+      syncInputs.forEach((input) => {
+        // Listen to change event (fires after button clicks via QuantityInput class)
+        input.addEventListener("change", function () {
+          syncQuantity(this);
+        });
+        
+        // Also listen to input event for manual typing
+        input.addEventListener("input", function () {
+          syncQuantity(this);
+        });
+      });
+      
+      // Also listen to button clicks on quantity-input custom elements
+      const quantityInputs = document.querySelectorAll("quantity-input");
+      quantityInputs.forEach((quantityInput) => {
+        const buttons = quantityInput.querySelectorAll('button[name="plus"], button[name="minus"]');
+        buttons.forEach((button) => {
+          button.addEventListener('click', function() {
+            // Wait a bit for the QuantityInput class to update the input value
+            setTimeout(() => {
+              const input = quantityInput.querySelector('input.quantity-input');
+              if (input) {
+                syncQuantity(input);
+              }
+            }, 10);
           });
         });
       });
