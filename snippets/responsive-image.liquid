@@ -10,6 +10,7 @@
   assign padding = padding | default: 0
   assign class = class
   assign sizes = sizes
+  assign link = link
   assign section_width = '100vw'
   assign section_width_mobile = '100vw'
   if container == 'stretch_width'
@@ -94,7 +95,10 @@
   {%- endcapture -%}
 {% endif %}
 {% if image_mobile != blank %}
-  <picture class="image-picture {{ class }}">
+  {% if link != blank %}
+    <a href="{{ link }}" class="responsive-image-link">
+  {% endif %}
+  <picture class="image-picture 0000 {{ class }}">
     {%- liquid
       assign srcset_mobile = image_mobile | image_url: width: image_mobile.width | image_tag: widths: '480, 360', alt: image_alt | split: 'srcset="' | last
       unless srcset_mobile contains 'src='
@@ -116,7 +120,13 @@
         alt: image_alt
     -}}
   </picture>
+  {% if link != blank %}
+    </a>
+  {% endif %}
 {% else %}
+  {% if link != blank %}
+    <a href="{{ link }}" class="responsive-image-link">
+  {% endif %}
   {% assign width = width | default: image.width %}
   {{-
     image
@@ -130,4 +140,7 @@
       class: class,
       alt: image_alt
   -}}
+  {% if link != blank %}
+    </a>
+  {% endif %}
 {% endif %}

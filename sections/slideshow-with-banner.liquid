@@ -97,6 +97,7 @@
                   assign block_st = block.settings
                   assign image = block_st.image
                   assign image_mobile = block_st.image_mobile | default: image
+                  assign image_link = block_st.image_link
                   assign slider_effect = block_st.slider_effect
                   assign local_video = block_st.local_video
                   assign lazy_load = false
@@ -197,7 +198,8 @@
                             image_alt: image_alt,
                             lazy_load: lazy_load,
                             first: forloop.first,
-                            class: 'load-img'
+                            class: 'load-img',
+                            link: image_link
                           %}
                         {% endif %}
                       {%- else -%}
@@ -328,6 +330,7 @@
                   {% liquid
                     assign image = block_st.image
                     assign mobile_image = block_st.mobile_image | default: image
+                    assign image_link = block_st.image_link
                   %}
                   {%- if image != blank or mobile_image != blank -%}
                     {%- assign image_alt = image.alt | escape | default: 'Images' -%}
@@ -336,7 +339,8 @@
                       container: section_width,
                       image: image,
                       image_mobile: mobile_image,
-                      image_alt: image_alt
+                      image_alt: image_alt,
+                      link: image_link
                     %}
                   {%- else -%}
                     {%- render 'placeholder-render' -%}
@@ -777,6 +781,11 @@
           "info": "t:sections.slideshow.blocks.slider_item.settings.image_mobile.info"
         },
         {
+          "type": "url",
+          "id": "image_link",
+          "label": "Image link"
+        },
+        {
           "type": "video",
           "id": "local_video",
           "label": "t:sections.shopable-video.blocks.video_local.label"
@@ -1095,6 +1104,11 @@
           "type": "image_picker",
           "id": "mobile_image",
           "label": "t:sections.all.image.mobile_image.label"
+        },
+        {
+          "type": "url",
+          "id": "image_link",
+          "label": "Image link"
         },
         {
           "type": "select",

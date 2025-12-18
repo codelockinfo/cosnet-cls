@@ -99,3 +99,17 @@ var WishlistPageShopify = (function () {
   };
 })();
 WishlistPageShopify.initWishlistItems();
+// Reload page when wishlist button is clicked on wishlist page
+(function(){
+  if(window.location.pathname.includes('/pages/wishlist')){
+    document.addEventListener('click', function(e){
+      const clickedElement = e.target.closest('.wishlistButtonOnWishlistPage, .wishListRemove, .wishListOnPop-up');
+      
+      if(clickedElement){
+        setTimeout(function(){
+          window.location.reload();
+        }, 200);
+      }
+    });
+  }
+})();
