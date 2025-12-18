@@ -63,7 +63,7 @@
             "discount_content_icon": "discount",
             "discount_content": "<p>Use code \"<strong>WELCOME15</strong>\" for discount 5% on your first order.</p>",
             "return_content_icon": "free_shipping",
-            "return_content": "<p>Enjoy Free Shipping on Orders Above<strong> ₹500</strong></p><p><br/></p>"
+            "return_content": "<p>Enjoy Free Shipping on Orders Above<strong> ₹500</strong><br/></p>"
           }
         },
         "live_view_rzDP6G": {
