@@ -59,11 +59,11 @@
           "settings": {
             "delivery_design": "vertical",
             "delivery_content_icon": "truck",
-            "delivery_content": "<p>Estimate delivery times:<strong> 3-5 days International.</strong></p>",
+            "delivery_content": "<p><strong>Estimate delivery times: <br/></strong>Quick & Reliable Shipping All Over India (3–5 Days)</p>",
             "discount_content_icon": "discount",
-            "discount_content": "<p>Use code \"<strong>WELCOME15</strong>\" for discount 15% on your first order.</p>",
+            "discount_content": "<p>Use code \"<strong>WELCOME15</strong>\" for discount 5% on your first order.</p>",
             "return_content_icon": "free_shipping",
-            "return_content": "<p>Free shipping & returns: <strong>On all orders over $150.</strong></p>"
+            "return_content": "<p>Enjoy Free Shipping on Orders Above<strong> ₹500</strong></p><p><br/></p>"
           }
         },
         "live_view_rzDP6G": {
