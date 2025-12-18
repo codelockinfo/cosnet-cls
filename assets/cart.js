@@ -109,6 +109,8 @@ class CartItems extends HTMLElement {
               .querySelector("header-total-price")
               .updateTotal(parsedState);
           }
+          // Check cart quantity and set cookie if condition matches
+          this.checkCartQuantityAndSetCookie(parsedState.item_count);
         }
         const html = new DOMParser().parseFromString(
           parsedState.sections[
@@ -187,6 +189,87 @@ class CartItems extends HTMLElement {
       .finally(() => {
         BlsLazyloadImg.init();
         cart_item?.classList.remove("loading");
+      });
+  }
+
+  checkCartQuantityAndSetCookie(itemCount) {
+    // Condition 1: If quantity is 1, store code G8CW8Z81Q243
+    // Condition 2: If quantity is 2 or more, store code 0ZJMAPXC9GK2
+    let discountCode = '';
+    
+    if (itemCount === 1) {
+      discountCode = 'G8CW8Z81Q243';
+    } else if (itemCount >= 2) {
+      discountCode = '0ZJMAPXC9GK2';
+    }
+    
+    if (discountCode) {
+      // Check if setCookie function exists (from theme.js)
+      if (typeof setCookie === 'function') {
+        // Set cookie with appropriate code, expires in 30 days
+        setCookie('cart_discount_code', discountCode, 30);
+      } else {
+        // Fallback: set cookie directly if setCookie function is not available
+        const date = new Date();
+        date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
+        const expires = 'expires=' + date.toUTCString();
+        document.cookie = 'cart_discount_code=' + discountCode + ';' + expires + ';path=/';
+      }
+      
+      // Apply discount code automatically
+      this.applyDiscountCodeFromCookie(discountCode);
+    } else {
+      // Remove cookie if quantity is 0
+      if (typeof deleteCookie === 'function') {
+        deleteCookie('cart_discount_code');
+      } else {
+        // Fallback: remove cookie directly if deleteCookie function is not available
+        document.cookie = 'cart_discount_code=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
+      }
+    }
+  }
+
+  applyDiscountCodeFromCookie(discountCode) {
+    // Fetch current cart to check existing discounts
+    fetch("/cart.json")
+      .then((res) => res.json())
+      .then((cart) => {
+        // Check if discount code is already applied
+        const existingDiscountCodes = cart.discount_codes || [];
+        const isAlreadyApplied = existingDiscountCodes.some((discount) => {
+          return discount.code === discountCode;
+        });
+        
+        if (isAlreadyApplied) {
+          return;
+        }
+        
+        // Get existing discount codes
+        const existingCodes = existingDiscountCodes.map((d) => d.code);
+        existingCodes.push(discountCode);
+        
+        // Apply discount code via cart update
+        const body = JSON.stringify({
+          discount: existingCodes.join(',')
+        });
+        
+        fetch(`${routes.cart_update_url}`, {
+          ...fetchConfig(),
+          body: body,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Optionally refresh the cart UI if needed
+            if (window.location.pathname.includes('/cart')) {
+              window.location.reload();
+            }
+          })
+          .catch((error) => {
+            console.error('Error applying discount code:', error);
+          });
+      })
+      .catch((error) => {
+        console.error('Error fetching cart:', error);
       });
   }
 
@@ -277,6 +360,8 @@ class CartItems extends HTMLElement {
               if (cart_free_ship) {
                 cart_free_ship.init(cart.items_subtotal_price);
               }
+              // Check cart quantity and set cookie if condition matches
+              this.checkCartQuantityAndSetCookie(cart.item_count);
             }
           })
           .catch((error) => {
@@ -424,6 +509,8 @@ class CartItems extends HTMLElement {
               if (cart_free_ship) {
                 cart_free_ship.init(cart.items_subtotal_price);
               }
+              // Check cart quantity and set cookie if condition matches
+              this.checkCartQuantityAndSetCookie(cart.item_count);
             }
           })
           .catch((error) => {
