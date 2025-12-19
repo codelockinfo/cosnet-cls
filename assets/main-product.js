@@ -1061,36 +1061,80 @@ var BlsDropDownProduct = (function () {
 BlsDropDownProduct.innit();
 
 var SyncQuantityInput = (() => {
+  let isSyncing = false; // Prevent recursive syncing
+  
   return {
     init: () => {
       // Function to sync quantity inputs
       const syncQuantity = (changedInput) => {
-        const value = changedInput.value;
-        const productId = changedInput.getAttribute('data-product-id');
+        // Prevent recursive syncing
+        if (isSyncing) {
+          return;
+        }
         
-        if (productId) {
-          // Sync all other quantity inputs with the same product ID
-          const allInputs = document.querySelectorAll(
-            `input.quantity-input[data-product-id="${productId}"]`
-          );
-          allInputs.forEach((otherInput) => {
-            if (otherInput !== changedInput) {
-              otherInput.value = value;
-              // Trigger change event to update the quantity-input custom element
-              otherInput.dispatchEvent(new Event('change', { bubbles: true }));
-            }
-          });
-        } else {
-          // Fallback: sync all inputs in product-detail__buy-buttons
-          const fallbackInputs = document.querySelectorAll(
-            ".product-detail__buy-buttons input.quantity-input"
-          );
-          fallbackInputs.forEach((otherInput) => {
-            if (otherInput !== changedInput) {
-              otherInput.value = value;
-              otherInput.dispatchEvent(new Event('change', { bubbles: true }));
-            }
-          });
+        try {
+          isSyncing = true;
+          
+          if (!changedInput || !changedInput.value) {
+            return;
+          }
+          
+          const value = changedInput.value;
+          const productId = changedInput.getAttribute('data-product-id');
+          const itemKey = changedInput.getAttribute('data-id');
+          
+          if (productId) {
+            // Sync all other quantity inputs with the same product ID
+            const allInputs = document.querySelectorAll(
+              `input.quantity-input[data-product-id="${productId}"]`
+            );
+            allInputs.forEach((otherInput) => {
+              if (otherInput !== changedInput && otherInput) {
+                try {
+                  otherInput.value = value;
+                  otherInput.setAttribute('data-value', value);
+                  // Don't dispatch change event to avoid triggering cart updates
+                  // The quantity-input custom element will handle the value change
+                } catch (error) {
+                  console.error('Error syncing input:', error);
+                }
+              }
+            });
+          } else if (itemKey) {
+            // Fallback: sync by item key (for cart items)
+            const allInputs = document.querySelectorAll(
+              `input.quantity-input[data-id="${itemKey}"]`
+            );
+            allInputs.forEach((otherInput) => {
+              if (otherInput !== changedInput && otherInput) {
+                try {
+                  otherInput.value = value;
+                  otherInput.setAttribute('data-value', value);
+                } catch (error) {
+                  console.error('Error syncing input:', error);
+                }
+              }
+            });
+          } else {
+            // Fallback: sync all inputs in product-detail__buy-buttons
+            const fallbackInputs = document.querySelectorAll(
+              ".product-detail__buy-buttons input.quantity-input"
+            );
+            fallbackInputs.forEach((otherInput) => {
+              if (otherInput !== changedInput && otherInput) {
+                try {
+                  otherInput.value = value;
+                  otherInput.setAttribute('data-value', value);
+                } catch (error) {
+                  console.error('Error syncing input:', error);
+                }
+              }
+            });
+          }
+        } catch (error) {
+          console.error('Error in syncQuantity:', error);
+        } finally {
+          isSyncing = false;
         }
       };
       
@@ -1100,32 +1144,82 @@ var SyncQuantityInput = (() => {
       );
       
       syncInputs.forEach((input) => {
+        if (!input) return;
+        
         // Listen to change event (fires after button clicks via QuantityInput class)
-        input.addEventListener("change", function () {
-          syncQuantity(this);
+        input.addEventListener("change", function (e) {
+          // Only sync if not already syncing
+          if (!isSyncing) {
+            syncQuantity(this);
+          }
         });
         
         // Also listen to input event for manual typing
-        input.addEventListener("input", function () {
-          syncQuantity(this);
+        input.addEventListener("input", function (e) {
+          // Only sync if not already syncing
+          if (!isSyncing) {
+            syncQuantity(this);
+          }
         });
       });
       
       // Also listen to button clicks on quantity-input custom elements
       const quantityInputs = document.querySelectorAll("quantity-input");
       quantityInputs.forEach((quantityInput) => {
+        if (!quantityInput) return;
+        
         const buttons = quantityInput.querySelectorAll('button[name="plus"], button[name="minus"]');
         buttons.forEach((button) => {
+          if (!button) return;
+          
           button.addEventListener('click', function() {
             // Wait a bit for the QuantityInput class to update the input value
             setTimeout(() => {
-              const input = quantityInput.querySelector('input.quantity-input');
-              if (input) {
-                syncQuantity(input);
+              try {
+                const input = quantityInput.querySelector('input.quantity-input');
+                if (input && !isSyncing) {
+                  syncQuantity(input);
+                }
+              } catch (error) {
+                console.error('Error syncing after button click:', error);
               }
-            }, 10);
+            }, 50);
           });
         });
+      });
+      
+      // Re-initialize when new elements are added (for dynamic content)
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.addedNodes.length > 0) {
+            mutation.addedNodes.forEach(function(node) {
+              if (node.nodeType === 1) { // Element node
+                const newInputs = node.querySelectorAll ? node.querySelectorAll('input.quantity-input') : [];
+                newInputs.forEach(function(input) {
+                  if (!input.hasAttribute('data-sync-listener')) {
+                    input.setAttribute('data-sync-listener', 'true');
+                    input.addEventListener("change", function() {
+                      if (!isSyncing) {
+                        syncQuantity(this);
+                      }
+                    });
+                    input.addEventListener("input", function() {
+                      if (!isSyncing) {
+                        syncQuantity(this);
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+      });
+      
+      // Observe the document for new quantity inputs
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
       });
     },
   };

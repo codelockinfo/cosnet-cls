@@ -104,12 +104,12 @@
                 <button
                   type="submit"
                   name="add"
-                  class="btn btn-primary w-full product_submit_button product-form__submit word-wrap relative lh-50"
+                  class="btn add-to-cart-button btn-primary w-full product_submit_button product-form__submit word-wrap relative lh-50"
                   style="--btn-padding-x: 2.5rem;"
                   {% if product.selected_or_first_available_variant.available == false %}
                     disabled
                   {% endif %}
-                >
+                 >
                   <span class="btn-label hidden-on-load">
                     {%- if product.selected_or_first_available_variant.inventory_management == null -%}
                       {{ 'products.product.general.add_to_cart' | t }}
@@ -229,27 +229,21 @@
           </div>
         {%- endform -%}
       </product-form>
-      {%- comment -%} Discount Coupons Section {%- endcomment -%}
-      {%- if product.metafields.custom.discount != blank -%}
+      {%- comment -%} Discount Coupons Section (Hide in sticky bottom bar) {%- endcomment -%}
+      {%- if product.metafields.custom.discount != blank and type != 'sticky' -%}
         {%- assign discount_coupons = product.metafields.custom.discount.value -%}
         {%- assign discount_types = product.metafields.custom.discount_type.value -%}
         {%- if discount_coupons.size > 0 -%}
-          <div class="product-discount-coupons mt-20">
+        <div class="product-discount-coupons mt-20" data-product-id="{{ product.id }}">
             <style>
               .discount-coupon-card {
                 background: #f5f5f5;
                 border-radius: 8px;
-                padding: 20px;
-                min-width: 280px;
-                max-width: 320px;
+                padding: 9px 9px;
                 position: relative;
                 cursor: pointer;
                 transition: all 0.3s ease;
                 border: 1px solid #e0e0e0;
-              }
-              .discount-coupon-card:hover {
-                border-color: var(--color-primary, #000);
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
               }
               .discount-type {
                 display: flex;
@@ -257,20 +251,20 @@
                 align-items: center;
               }
               .discount-icon {
-                width: 40px;
-                height: 40px;
+                width: 22px;
+                height: 22px;
                 background: #333;
                 border-radius: 4px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 color: white;
-                font-size: 18px;
+                font-size: 12px;
                 font-weight: bold;
-                margin-bottom: 12px;
+                margin-bottom: 9px;
               }
               .discount-title {
-                font-size: 18px;
+                font-size: 12px;
                 font-weight: bold;
                 color: #333;
                 margin-bottom: 8px;
@@ -284,7 +278,7 @@
                 line-height: 1.4;
               }
               .discount-separator {
-                border-top: 1px dashed #ccc;
+                border-top: 2px dashed #000000;
                 margin: 12px 0;
               }
               .discount-code-section {
@@ -300,8 +294,10 @@
                 font-weight: 600;
                 margin-left: 4px;
               }
+
+
             </style>
-            <div class="flex flex-wrap gap-15">
+            <div class="flex flex-wrap gap-15 custom-discount-box">
               {%- for coupon in discount_coupons -%}
                 {%- liquid
                   assign coupon_code = ''
@@ -340,7 +336,7 @@
                   endif
                 -%}
                 {%- if coupon_code != blank -%}
-                  <div class="discount-coupon-card" onclick="copyCouponCode(this)" data-discount-code="{{ coupon_code }}">
+                  <div class="discount-coupon-card" onclick="copyCouponCode(this)" data-discount-code="{{ coupon_code }}" data-discount-type="{{ coupon_type | escape }}">
                   <div class="discount-type">
                     <div class="discount-icon">
                       <span class="discount-icon-text">{{ coupon_icon }}</span>
@@ -370,27 +366,6 @@
               {%- endfor -%}
             </div>
           </div>
-          <script>
-            function copyCouponCode(element) {
-              const codeElement = element.querySelector('.coupon-code');
-              if (!codeElement) return;
-              
-              const code = codeElement.getAttribute('data-code') || codeElement.textContent.trim();
-              if (!code || code === 'At checkout') return;
-              
-              navigator.clipboard.writeText(code).then(function() {
-                const originalText = codeElement.textContent;
-                codeElement.textContent = 'Copied!';
-                codeElement.style.color = 'var(--color-primary, #000)';
-                setTimeout(function() {
-                  codeElement.textContent = originalText;
-                  codeElement.style.color = '#333';
-                }, 2000);
-              }).catch(function(err) {
-                console.error('Failed to copy coupon code:', err);
-              });
-            }
-          </script>
         {%- endif -%}
       {%- endif -%}
     </div>
@@ -411,4 +386,156 @@
       </div>
     </div>
   {% endif %}
+{%- endif -%}
+
+{%- comment -%} Trigger coupon check and cookie setup when add to cart button is clicked {%- endcomment -%}
+{%- if template.name == 'product' and type != 'quickview' -%}
+<script>
+(function() {
+  'use strict';
+  
+  // No need to check body class since Liquid condition already ensures we're on product page
+  
+    // Function to trigger coupon check after cart update
+    // Same as what happens on page reload (initializeCouponCheck)
+    const triggerCouponCheck = () => {
+      // Wait for cart to be fully updated (same delay as reload)
+      setTimeout(() => {
+        try {
+          // Call the same functions that run on reload
+          if (typeof window.initCartQuantityCheck === 'function') {
+            window.initCartQuantityCheck();
+          }
+          
+          if (typeof window.checkAllCartProductsCoupons === 'function') {
+            window.checkAllCartProductsCoupons();
+          }
+        } catch (error) {
+          console.error('Error in coupon check:', error);
+        }
+      }, 1000); // Same delay as reload (1000ms)
+    };
+  
+  // Wait for DOM to be ready
+  function init() {
+    const productForm = document.querySelector('product-form');
+    if (!productForm) {
+      setTimeout(init, 100);
+      return;
+    }
+    
+    // Listen for cart update events (published by ProductForm)
+    if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
+      subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
+        if (event.source === 'product-form' && !event.errors) {
+          triggerCouponCheck();
+        }
+      });
+    }
+    
+    // Listen for custom cart:updated event
+    document.addEventListener('cart:updated', () => {
+      triggerCouponCheck();
+    });
+    
+    // Intercept add to cart button click - PRIMARY METHOD
+    // Try multiple selectors to find the button (including add-to-cart-button class)
+    const buttonSelectors = [
+      'button[name="add"]',
+      '.product-form__submit',
+      '.product_submit_button',
+      '.add-to-cart-button',
+      'button.add-to-cart-button'
+    ];
+    
+    let addToCartButton = null;
+    for (let selector of buttonSelectors) {
+      addToCartButton = productForm.querySelector(selector);
+      if (addToCartButton) {
+        break;
+      }
+    }
+    
+    // Also try document-wide search for add-to-cart-button
+    if (!addToCartButton) {
+      addToCartButton = document.querySelector('.add-to-cart-button, button.add-to-cart-button');
+    }
+    
+    if (addToCartButton) {
+      addToCartButton.addEventListener('click', function(e) {
+        // Trigger coupon check - same as reload
+        triggerCouponCheck();
+      }, true); // Use capture phase to catch early
+    }
+    
+    // ALWAYS use event delegation as backup to catch dynamically added buttons
+    document.addEventListener('click', function(e) {
+      const clickedButton = e.target.closest('.add-to-cart-button, button[name="add"], .product-form__submit, .product_submit_button, button.add-to-cart-button');
+      if (clickedButton && (productForm.contains(clickedButton) || clickedButton.closest('product-form') || clickedButton.classList.contains('add-to-cart-button'))) {
+        e.stopPropagation(); // Prevent multiple triggers
+        // Trigger coupon check - same as reload
+        triggerCouponCheck();
+      }
+    }, true); // Use capture phase
+    
+    // Also intercept form submission
+    const form = productForm.querySelector('form[data-type="add-to-cart-form"]');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        // Trigger coupon check after form submission
+        setTimeout(() => {
+          triggerCouponCheck();
+        }, 1200);
+      }, true); // Use capture phase
+    }
+    
+    // Intercept fetch calls to cart/add.js as backup
+    const originalFetch = window.fetch;
+    window.fetch = function(...args) {
+      const url = args[0];
+      if (typeof url === 'string' && url.includes('/cart/add.js')) {
+        return originalFetch.apply(this, args).then(response => {
+          // Clone the response to read it
+          const clonedResponse = response.clone();
+          
+          // Check if it's a successful add to cart
+          clonedResponse.json().then(data => {
+            if (!data.status && !data.errors) {
+              // Successfully added to cart - trigger coupon check
+              triggerCouponCheck();
+            }
+          }).catch(() => {
+            // Not JSON, might be text response
+            clonedResponse.text().then(text => {
+              try {
+                const data = JSON.parse(text);
+                if (!data.status && !data.errors) {
+                  triggerCouponCheck();
+                }
+              } catch (e) {
+                // Not JSON, ignore
+              }
+            });
+          });
+          
+          return response;
+        });
+      }
+      return originalFetch.apply(this, args);
+    };
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      init();
+    });
+  } else {
+    setTimeout(function() {
+      init();
+    }, 200);
+  }
+  
+})();
+</script>
 {%- endif -%}

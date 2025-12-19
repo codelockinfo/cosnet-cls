@@ -1,0 +1,8 @@
+{
+  "product_id": {{ product.id }},
+  "metafields": {
+    "discount": {% if product.metafields.custom.discount != blank %}{{ product.metafields.custom.discount.value | json }}{% else %}null{% endif %},
+    "discount_type": {% if product.metafields.custom.discount_type != blank %}{{ product.metafields.custom.discount_type.value | json }}{% else %}null{% endif %}
+  }
+}
+
