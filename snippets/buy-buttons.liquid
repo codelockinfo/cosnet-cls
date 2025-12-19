@@ -233,6 +233,7 @@
       {%- if product.metafields.custom.discount != blank and type != 'sticky' -%}
         {%- assign discount_coupons = product.metafields.custom.discount.value -%}
         {%- assign discount_types = product.metafields.custom.discount_type.value -%}
+        {%- assign discount_descriptions = product.metafields.custom.discount_description.value -%}
         {%- if discount_coupons.size > 0 -%}
         <div class="product-discount-coupons mt-20" data-product-id="{{ product.id }}">
             <style>
@@ -314,6 +315,14 @@
                   
                   if coupon.description != blank
                     assign coupon_description = coupon.description
+                  endif
+                  
+                  if discount_descriptions != blank
+                    if discount_descriptions[forloop_index0] != blank
+                      assign coupon_description = discount_descriptions[forloop_index0]
+                    elsif discount_descriptions != blank and discount_descriptions.first != blank
+                      assign coupon_description = discount_descriptions.first
+                    endif
                   endif
                   
                   if discount_types != blank
