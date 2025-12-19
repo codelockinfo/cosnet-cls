@@ -13,6 +13,7 @@
   "sections": {
     "newsletter_popup_9NG7Rx": {
       "type": "newsletter-popup",
+      "disabled": true,
       "name": "t:sections.newsletter_popup.name",
       "settings": {
         "show": "show_homepage",
@@ -61,8 +62,9 @@
         "promotion_code": "",
         "promotion_width": 690,
         "promotion_sub_title": "Special Offer",
-        "promotion_title": "Cyber <br> Monday",
+        "promotion_title": "Cyber  Monday",
         "promotion_content": "Up to <span>50% Off</span> when using code [promotion_code]",
+        "promotion_banner": "shopify://shop_images/2_e9f787b8-2aaa-4e12-b390-7e2c30d1760a.webp",
         "banner_width": 36.5
       }
     }
