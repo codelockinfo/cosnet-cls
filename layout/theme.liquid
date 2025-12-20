@@ -310,35 +310,81 @@
 
         const text = discountType.trim().toLowerCase();
         
-        // Pattern 1: Price-based conditions
-        // "Buy 100 rs", "Buy ₹100", "Spend 500 rs", "Minimum 1000 amount"
+        // Pattern 1: Price-based conditions (flexible - extracts amount from any format)
+        // Supports any text format with amount: "Buy 100 rs", "Buy ₹100", "Spend 500", "Minimum 1000"
+        // Also supports: "Buy 1000 and get free shipping", "Spend 500 and get free product"
+        // Also supports: "Buy 500 and get 100 off", "Purchase 1000 and get discount"
+        // The system extracts the amount requirement dynamically, regardless of benefit text
         const pricePatterns = [
-          /buy\s+[₹₹]?\s*(\d+)\s*(rs|rupees?|amount)/i,  // "Buy 100 rs", "Buy ₹100"
-          /spend\s+[₹₹]?\s*(\d+)\s*(rs|rupees?)/i,        // "Spend 500 rs"
-          /minimum\s+[₹₹]?\s*(\d+)\s*(rs|rupees?|amount)/i, // "Minimum 1000 amount"
-          /purchase\s+[₹₹]?\s*(\d+)\s*(rs|rupees?)/i      // "Purchase 200 rs"
+          // Generic patterns - extract any number after buy/spend/minimum/purchase
+          /(?:buy|spend|minimum|purchase)\s+[₹₹]?\s*(\d+)\s*(?:rs|rupees?|amount|and|get|for|to|off|on)?/i,
+          // Patterns with "and get" or "to get" - extract amount before any benefit
+          /(?:buy|spend|purchase)\s+[₹₹]?\s*(\d+).*(?:and|to)\s+get/i,
+          // Reverse patterns - benefit mentioned first, then amount
+          /(?:free|get|discount|off).*[₹₹]?\s*(\d+)/i,
+          // Simple amount patterns
+          /[₹₹]?\s*(\d+)\s*(?:rs|rupees?|amount|and|above|more)/i
         ];
         
         for (let pattern of pricePatterns) {
           const match = text.match(pattern);
-          if (match) {
-            const minPrice = parseInt(match[1]);
-            return {
-              type: 'price',
-              value: minPrice,
-              condition: minPrice + '+',
-              originalText: discountType
-            };
+          if (match && match[1]) {
+              const minPrice = parseInt(match[1]);
+            if (!isNaN(minPrice) && minPrice > 0) {
+              return {
+                type: 'price',
+                value: minPrice,
+                condition: minPrice + '+',
+                originalText: discountType
+              };
+            }
           }
         }
         
-        // Pattern 2: Quantity-based conditions - "Buy X Get Y Free"
+        // Pattern 2a: "Buy X Get Y% OFF" or "Buy X product get Y% off" (CHECK THIS FIRST - most specific)
+        // "Buy 2 Get 30% OFF" → requires minimum 2 items in cart (just the "Buy X" number)
+        // "Buy 3 product get 10% off" → requires minimum 3 items in cart
+        // "Buy 5 get 20% discount" → requires minimum 5 items in cart
+        // This is different from "Buy X Get Y Free" - here we only need X items (not X + Y)
+        // IMPORTANT: Check this BEFORE other patterns to avoid false matches
+        const buyGetPercentOffMatch = text.match(/buy\s+(\d+)\s+(?:product\s+)?get\s+(\d+)%\s*(off|discount)?/i);
+        if (buyGetPercentOffMatch) {
+          const buyQuantity = parseInt(buyGetPercentOffMatch[1]); // The "Buy X" number
+          return {
+            type: 'quantity',
+            value: buyQuantity, // Minimum quantity needed (just X, not X + Y)
+            condition: buyQuantity + '+', // At least X items
+            originalText: discountType
+          };
+        }
+        
+        // Pattern 2b: "Buy X get Y off" (fixed amount discount - CHECK BEFORE free pattern)
+        // "Buy 1 get 100 off" → requires minimum 1 item in cart (just the "Buy X" number)
+        // "Buy 2 get 200 off" → requires minimum 2 items in cart
+        // "Buy 3 get 500 off" → requires minimum 3 items in cart
+        // Here Y is a fixed discount amount (not percentage, not free items)
+        // We only check the "Buy X" quantity requirement
+        // IMPORTANT: Must check this BEFORE "Buy X Get Y Free" to avoid false matches
+        const buyGetAmountOffMatch = text.match(/buy\s+(\d+)\s+get\s+(\d+)\s+off(?!\s*%)/i);
+        if (buyGetAmountOffMatch) {
+          const buyQuantity = parseInt(buyGetAmountOffMatch[1]); // The "Buy X" number
+          const discountAmount = parseInt(buyGetAmountOffMatch[2]); // The "Get Y" amount (for reference only)
+          return {
+            type: 'quantity',
+            value: buyQuantity, // Minimum quantity needed (just X, not X + Y)
+            condition: buyQuantity + '+', // At least X items
+            originalText: discountType
+          };
+        }
+        
+        // Pattern 2c: Quantity-based conditions - "Buy X Get Y Free"
         // "Buy 1 get 1 free" → requires minimum 2 items in cart (1 + 1 = 2)
         // "Buy 4 get 1 free" → requires minimum 5 items in cart (4 + 1 = 5)
         // "Buy 7 get 1 free" → requires minimum 8 items in cart (7 + 1 = 8)
         // Minimum should be 1 more than the "Buy X" number (X + Y)
         // No maximum limit - users can add more items
-        const buyGetFreeMatch = text.match(/buy\s+(\d+)\s+get\s+(\d+)\s*(free)?/i);
+        // IMPORTANT: Make sure this doesn't match when there's a "%" sign (already checked above)
+        const buyGetFreeMatch = text.match(/buy\s+(\d+)\s+get\s+(\d+)\s*(free|item)?(?!\s*%)/i);
         if (buyGetFreeMatch) {
           const buyQuantity = parseInt(buyGetFreeMatch[1]); // The "Buy X" number
           const freeQuantity = parseInt(buyGetFreeMatch[2]); // The "Get Y" number
@@ -351,7 +397,7 @@
           };
         }
         
-        // Pattern 2b: Other quantity-based conditions
+        // Pattern 2c: Other quantity-based conditions
         // "Buy 2 items", "Minimum 5 quantity"
         const quantityPatterns = [
           /buy\s+(\d+)\s+(items?|quantity)/i,  // "Buy 3 items"
@@ -443,10 +489,16 @@
           }
 
           const cartTotal = cart.total_price / 100;
+          
+          // Calculate total cart quantity
+          let totalCartQuantity = 0;
+          cart.items.forEach(function(item) {
+            totalCartQuantity += item.quantity;
+          });
 
           let allMatchingCoupons = [];
           let bestCoupon = null;
-          let highestValue = -1;
+          let closestDifference = Infinity; // Track the smallest difference from cart quantity
 
           // Function to fetch product metafields from product page HTML
           async function fetchProductMetafields(productId, productUrl) {
@@ -543,7 +595,7 @@
                 discount_type: discountTypes
               };
             } catch (error) {
-              console.error('Error fetching product metafields:', error);
+              console.error(`    ❌ Error fetching product metafields for Product ID ${productId}:`, error);
               return null;
             }
           }
@@ -590,77 +642,101 @@
                 const discountCode = discountCodes[i];
                 const discountType = discountTypes[i] || '';
                 
-                if (!discountCode || discountCode === 'At checkout') continue;
+                if (!discountCode || discountCode === 'At checkout') {
+                  continue;
+                }
 
                 // Parse condition
                 const parsedCondition = parseDiscountTypeToCondition(discountType);
+                
                 const shouldShow = await matchesDiscountCondition(discountType, productId);
 
                 if (shouldShow && discountCode && discountCode !== 'At checkout') {
                   // Check if this coupon code already exists to avoid duplicates
                   const codeExists = allMatchingCoupons.some(c => c.code === discountCode);
                   
+                  // Calculate difference from cart quantity (for quantity-based conditions)
+                  // Select coupon whose condition is closest to cart quantity
+                  let difference = Infinity;
+                  if (parsedCondition) {
+                    if (parsedCondition.type === 'quantity') {
+                      // Calculate absolute difference: |cartQuantity - requiredQuantity|
+                      difference = Math.abs(totalCartQuantity - parsedCondition.value);
+                    } else if (parsedCondition.type === 'price') {
+                      // For price-based, use cart total
+                      difference = Math.abs(cartTotal - parsedCondition.value);
+                    } else {
+                      // No condition - set high difference so it's only selected if no other matches
+                      difference = 999999;
+                    }
+                  } else {
+                    // No condition - set high difference
+                    difference = 999999;
+                  }
+                  
                   if (!codeExists) {
                     allMatchingCoupons.push({
                       code: discountCode,
                       condition: parsedCondition,
-                      productId: productId
+                      productId: productId,
+                      difference: difference
                     });
                   }
 
-                  // Calculate score for selection (always check for best coupon, even if duplicate)
-                  let score = 0;
-                  if (parsedCondition) {
-                    if (parsedCondition.type === 'price') {
-                      score = parsedCondition.value * 1000;
-                    } else if (parsedCondition.type === 'quantity') {
-                      score = parsedCondition.value;
-                    }
-                  }
-
-                  if (score > highestValue) {
-                    highestValue = score;
-                    bestCoupon = {
-                      code: discountCode,
-                      condition: parsedCondition
-                    };
-                  } else if (score === 0 && !bestCoupon) {
-                    bestCoupon = {
-                      code: discountCode,
-                      condition: parsedCondition
-                    };
+                  // Track the closest difference (will select best after all coupons are collected)
+                  if (difference < closestDifference) {
+                    closestDifference = difference;
                   }
                 }
               } catch (error) {
-                console.error('Error processing coupon:', error);
+                console.error(`    ❌ Error processing coupon "${discountCodes[i]}":`, error);
                 continue;
               }
             }
           }
 
+          // Sort all matching coupons: Prioritize quantity-based, then by closest difference
+          allMatchingCoupons.sort((a, b) => {
+            const typeA = a.condition ? a.condition.type : 'none';
+            const typeB = b.condition ? b.condition.type : 'none';
+            const diffA = a.difference !== undefined ? a.difference : 999999;
+            const diffB = b.difference !== undefined ? b.difference : 999999;
+            
+            // Priority 1: Quantity-based coupons ALWAYS come first
+            if (typeA === 'quantity' && typeB !== 'quantity') {
+              return -1; // a (quantity) comes first
+            }
+            if (typeB === 'quantity' && typeA !== 'quantity') {
+              return 1; // b (quantity) comes first
+            }
+            
+            // Priority 2: Within same type, sort by difference (smallest first)
+            return diffA - diffB;
+          });
+          
+          // Select the best coupon (quantity-based prioritized, then closest difference)
+          if (allMatchingCoupons.length > 0) {
+            bestCoupon = {
+              code: allMatchingCoupons[0].code,
+              condition: allMatchingCoupons[0].condition,
+              difference: allMatchingCoupons[0].difference
+            };
+          }
+          
           // Set cookie for best matching coupon and store all matching coupons for fallback
           try {
-            // Store all matching coupons in sessionStorage for fallback (remove duplicates)
+            // Store all matching coupons in sessionStorage (already sorted: quantity first, then by closest)
             if (allMatchingCoupons.length > 0) {
-              const couponCodes = allMatchingCoupons.map(c => c.code).filter(c => c && c !== 'At checkout');
-              // Remove duplicates using Set
-              const uniqueCouponCodes = [...new Set(couponCodes)];
-              sessionStorage.setItem('all_matching_coupons', JSON.stringify(uniqueCouponCodes));
+              const couponCodes = allMatchingCoupons.map(c => c.code);
+              sessionStorage.setItem('all_matching_coupons', JSON.stringify(couponCodes));
             } else {
               sessionStorage.removeItem('all_matching_coupons');
             }
             
-            if (bestCoupon && bestCoupon.code) {
-              setCookie('discount_code', bestCoupon.code, 30);
-              // Apply discount to app discount block
-              setTimeout(function() {
-                if (typeof applyDiscountFromCookie === 'function') {
-                  applyDiscountFromCookie();
-                }
-              }, 300);
-            } else if (allMatchingCoupons.length > 0) {
-              // Use first matching coupon
-              setCookie('discount_code', allMatchingCoupons[0].code, 30);
+            // ALWAYS use the first coupon from sorted array (quantity-based prioritized)
+            if (allMatchingCoupons.length > 0) {
+              const selectedCoupon = allMatchingCoupons[0];
+              setCookie('discount_code', selectedCoupon.code, 30);
               // Apply discount to app discount block
               setTimeout(function() {
                 if (typeof applyDiscountFromCookie === 'function') {
@@ -888,13 +964,7 @@
                 return '';
               }
               
-              const discountCode = couponCodeToTry || getCookie('discount_code');
-              
-              if (!discountCode || discountCode.trim() === '') {
-                return; // No discount code in cookie
-              }
-              
-              // Find the discount block and input field
+              // Find the discount block and input field first
               const discountForm = document.querySelector('.dmp_discount-form');
               if (!discountForm) {
                 return; // Discount form not found
@@ -907,6 +977,24 @@
                 return; // Input or button not found
               }
               
+              // Check input value first - if empty, get from cookie
+              let discountCode = discountInput.value.trim();
+              
+              if (!discountCode || discountCode === '') {
+                // Input is empty, get from cookie
+                discountCode = couponCodeToTry || getCookie('discount_code');
+              } else {
+                // If input has value but cookie is different, use cookie value
+                const cookieValue = couponCodeToTry || getCookie('discount_code');
+                if (cookieValue && cookieValue.trim() !== '' && cookieValue.trim() !== discountCode) {
+                  discountCode = cookieValue.trim();
+                }
+              }
+              
+              if (!discountCode || discountCode.trim() === '') {
+                return; // No discount code available
+              }
+              
               // Hide any error messages immediately
               const errorParent = document.querySelector('.dmp_error-parent');
               if (errorParent) {
@@ -915,12 +1003,18 @@
                 errorParent.style.opacity = '0';
               }
               
-              // Set the discount code value
+              // Set the discount code value in input
               discountInput.value = discountCode.trim();
               
               // Trigger input event to ensure app detects the change
               discountInput.dispatchEvent(new Event('input', { bubbles: true }));
               discountInput.dispatchEvent(new Event('change', { bubbles: true }));
+              discountInput.dispatchEvent(new Event('keyup', { bubbles: true }));
+              
+              // Apply immediately - small delay to ensure value is set
+              setTimeout(() => {
+                applyButton.click();
+              }, 100);
               
               // Function to try next coupon if current one fails
               function tryNextCoupon(currentCode) {
@@ -993,34 +1087,29 @@
                 subtree: true
               });
               
-              // Small delay before clicking apply button to ensure value is set
+              // Check for error after a delay (fallback)
               setTimeout(() => {
-                applyButton.click();
-                
-                // Also check for error after a delay (fallback)
-                setTimeout(() => {
-                  const errorMessage = document.querySelector('.dmp_error-message');
-                  if (errorMessage && errorMessage.textContent && errorMessage.textContent.includes('not valid')) {
-                    // Hide error immediately
-                    const errorParent = errorMessage.closest('.dmp_error-parent');
-                    if (errorParent) {
-                      errorParent.style.display = 'none';
-                      errorParent.style.visibility = 'hidden';
-                      errorParent.style.opacity = '0';
-                    }
-                    
-                    // Try next coupon
-                    if (!tryNextCoupon(discountCode.trim())) {
-                      errorObserver.disconnect();
-                    }
-                  } else {
-                    // No error found, disconnect observer after a reasonable time
-                    setTimeout(() => {
-                      errorObserver.disconnect();
-                    }, 2000);
+                const errorMessage = document.querySelector('.dmp_error-message');
+                if (errorMessage && errorMessage.textContent && errorMessage.textContent.includes('not valid')) {
+                  // Hide error immediately
+                  const errorParent = errorMessage.closest('.dmp_error-parent');
+                  if (errorParent) {
+                    errorParent.style.display = 'none';
+                    errorParent.style.visibility = 'hidden';
+                    errorParent.style.opacity = '0';
                   }
-                }, 1000);
-              }, 100);
+                  
+                  // Try next coupon
+                  if (!tryNextCoupon(discountCode.trim())) {
+                    errorObserver.disconnect();
+                  }
+                } else {
+                  // No error found, disconnect observer after a reasonable time
+                  setTimeout(() => {
+                    errorObserver.disconnect();
+                  }, 2000);
+                }
+              }, 1500);
             } catch (error) {
               console.error('Error applying discount from cookie:', error);
             }

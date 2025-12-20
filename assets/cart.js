@@ -177,6 +177,14 @@ class CartItems extends HTMLElement {
             cart_free_ship.init(parsedState.items_subtotal_price);
           }
           this.updateLiveRegions(line, key, parsedState.item_count);
+          
+          // Reload page if item was removed (quantity was 0) and we're on cart page
+          if (quantity === 0 && window.location.pathname.includes('/cart')) {
+            setTimeout(() => {
+              window.location.reload();
+            }, 300);
+            return;
+          }
         }
         // let gift_card_product = this.querySelector(`cart-remove-button#${gift_form_minicart.dataset.variantId}`);
         // gift_form_minicart
