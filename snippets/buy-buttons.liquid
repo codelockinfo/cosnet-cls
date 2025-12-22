@@ -295,9 +295,79 @@
                 font-weight: 600;
                 margin-left: 4px;
               }
+              .discount-copy-hint {
+                font-size: 11px;
+                color: #999;
+                margin-top: 4px;
+                font-style: italic;
+                text-align: center;
+              }
 
 
             </style>
+            <script>
+            function copyCouponCode(element) {
+              const discountCode = element.getAttribute('data-discount-code');
+              if (!discountCode || discountCode === 'At checkout') {
+                return;
+              }
+              
+              // Copy to clipboard
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(discountCode).then(function() {
+                  // Show feedback
+                  const copyHint = element.querySelector('.discount-copy-hint');
+                  if (copyHint) {
+                    const originalText = copyHint.textContent;
+                    copyHint.textContent = 'Copied!';
+                    copyHint.style.color = '#4CAF50';
+                    setTimeout(function() {
+                      copyHint.textContent = originalText;
+                      copyHint.style.color = '#999';
+                    }, 2000);
+                  }
+                }).catch(function(err) {
+                  console.error('Failed to copy code:', err);
+                  // Fallback for older browsers
+                  fallbackCopyTextToClipboard(discountCode, element);
+                });
+              } else {
+                // Fallback for older browsers
+                fallbackCopyTextToClipboard(discountCode, element);
+              }
+            }
+            
+            function fallbackCopyTextToClipboard(text, element) {
+              const textArea = document.createElement('textarea');
+              textArea.value = text;
+              textArea.style.position = 'fixed';
+              textArea.style.left = '-999999px';
+              textArea.style.top = '-999999px';
+              document.body.appendChild(textArea);
+              textArea.focus();
+              textArea.select();
+              
+              try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                  const copyHint = element.querySelector('.discount-copy-hint');
+                  if (copyHint) {
+                    const originalText = copyHint.textContent;
+                    copyHint.textContent = 'Copied!';
+                    copyHint.style.color = '#4CAF50';
+                    setTimeout(function() {
+                      copyHint.textContent = originalText;
+                      copyHint.style.color = '#999';
+                    }, 2000);
+                  }
+                }
+              } catch (err) {
+                console.error('Fallback copy failed:', err);
+              }
+              
+              document.body.removeChild(textArea);
+            }
+            </script>
             <div class="flex flex-wrap gap-15 custom-discount-box">
               {%- for coupon in discount_coupons -%}
                 {%- liquid
@@ -366,6 +436,7 @@
                       {%- if coupon_code != blank and coupon_code != 'At checkout' -%}
                         <span class="discount-code-label">Code:</span>
                         <span class="discount-code-value coupon-code" data-code="{{ coupon_code }}">{{ coupon_code }}</span>
+                        <div class="discount-copy-hint">Tap to copy</div>
                       {%- else -%}
                         <span class="discount-code-value">At checkout</span>
                       {%- endif -%}
