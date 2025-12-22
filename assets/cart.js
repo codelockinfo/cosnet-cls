@@ -201,11 +201,39 @@ class CartItems extends HTMLElement {
   }
 
   checkCartQuantityAndSetCookie(itemCount) {
-    // Call the existing dynamic coupon checking system that handles "buy x get y" offers
-    // This function checks all products in cart, their metafields, and matches conditions dynamically
-    // For "buy x get y" offers, both x and y products are counted together in the total
-    if (typeof window.checkAllCartProductsCoupons === 'function') {
-      window.checkAllCartProductsCoupons();
+    // Condition 1: If quantity is 1, store code G8CW8Z81Q243
+    // Condition 2: If quantity is 2 or more, store code 0ZJMAPXC9GK2
+    let discountCode = '';
+    
+    if (itemCount === 1) {
+      discountCode = 'G8CW8Z81Q243';
+    } else if (itemCount >= 2) {
+      discountCode = '0ZJMAPXC9GK2';
+    }
+    
+    if (discountCode) {
+      // Check if setCookie function exists (from theme.js)
+      if (typeof setCookie === 'function') {
+        // Set cookie with appropriate code, expires in 30 days
+        setCookie('cart_discount_code', discountCode, 30);
+      } else {
+        // Fallback: set cookie directly if setCookie function is not available
+        const date = new Date();
+        date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
+        const expires = 'expires=' + date.toUTCString();
+        document.cookie = 'cart_discount_code=' + discountCode + ';' + expires + ';path=/';
+      }
+      
+      // Apply discount code automatically
+      this.applyDiscountCodeFromCookie(discountCode);
+    } else {
+      // Remove cookie if quantity is 0
+      if (typeof deleteCookie === 'function') {
+        deleteCookie('cart_discount_code');
+      } else {
+        // Fallback: remove cookie directly if deleteCookie function is not available
+        document.cookie = 'cart_discount_code=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
+      }
     }
   }
 
