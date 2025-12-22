@@ -468,6 +468,28 @@
                 </div>
               </div>
             </collapsible-block>
+            {%- comment -%} Instruction section - only show if metafield has value {%- endcomment -%}
+            {%- if product.metafields.custom.instructions != blank -%}
+              <collapsible-block
+                tabindex="0"
+                class="bls-toggle relative border-bottom block{% if enable_skeleton_loading %} skeleton-loading{% endif %}"
+              >
+                <h3 class="h6 my-0 pointer py-17 relative collapsible-heading heading-letter-spacing">
+                  Instructions
+                  <span class="open-children-toggle absolute inset-0 flex flex-end pointer">
+                    <span class="icon_plus-animation"> </span>
+                  </span>
+                </h3>
+                <div
+                  class="overflow-hidden collapsible-content"
+                  style="display: none;"
+                >
+                  <div class="collapsible-content_inner mb-12 rich__text-mt-0">
+                    {{ product.metafields.custom.instructions | metafield_tag }}
+                  </div>
+                </div>
+              </collapsible-block>
+            {%- endif -%}
           {%- when 'countdown_timer' -%}
             {% comment %} Countdown timer {% endcomment %}
             {{ 'countdown.css' | asset_url | stylesheet_tag }}
