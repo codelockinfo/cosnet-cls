@@ -724,95 +724,6 @@
       ],
       "settings": {}
     },
-    "instagram_KRMxLN": {
-      "type": "instagram",
-      "blocks": {
-        "instagram_manual_upload_pXb4WN": {
-          "type": "instagram_manual_upload",
-          "settings": {
-            "image": "shopify://shop_images/Model-applying-skincare-serum-beautifully-captured-through-product-photography-at-a-quality-photo-studio.webp",
-            "link": "https://www.instagram.com/cosnet.co.in"
-          }
-        },
-        "instagram_manual_upload_DJQyde": {
-          "type": "instagram_manual_upload",
-          "settings": {
-            "image": "shopify://shop_images/Title-Image_640X640-px.jpg",
-            "link": "https://www.instagram.com/cosnet.co.in"
-          }
-        },
-        "instagram_manual_upload_wmWdNj": {
-          "type": "instagram_manual_upload",
-          "settings": {
-            "image": "shopify://shop_images/eye-skin-care-beautiful-woman-applying-eye-cream-skin-under-eyes-high-quality-eye-skin-care-beautiful-woman-applying-eye-cream-113864362.webp",
-            "link": "https://www.instagram.com/cosnet.co.in"
-          }
-        },
-        "instagram_manual_upload_9jKbRJ": {
-          "type": "instagram_manual_upload",
-          "settings": {
-            "image": "shopify://shop_images/RNB01420_1000x_crop_center_5d70811b-938a-4707-865b-898c8ad77e0d.webp",
-            "link": "https://www.instagram.com/cosnet.co.in"
-          }
-        },
-        "instagram_manual_upload_6TXMiF": {
-          "type": "instagram_manual_upload",
-          "settings": {
-            "image": "shopify://shop_images/is-using-lip-balm-with-spf-suitable-for-lips-feat.jpg",
-            "link": "https://www.instagram.com/cosnet.co.in"
-          }
-        },
-        "instagram_manual_upload_fFMiwM": {
-          "type": "instagram_manual_upload",
-          "settings": {
-            "image": "shopify://shop_images/ws-22aug2025-m.jpg",
-            "link": "https://www.instagram.com/cosnet.co.in"
-          }
-        }
-      },
-      "block_order": [
-        "instagram_manual_upload_pXb4WN",
-        "instagram_manual_upload_DJQyde",
-        "instagram_manual_upload_wmWdNj",
-        "instagram_manual_upload_9jKbRJ",
-        "instagram_manual_upload_6TXMiF",
-        "instagram_manual_upload_fFMiwM"
-      ],
-      "disabled": true,
-      "settings": {
-        "section_width": "full_width",
-        "color_scheme": "",
-        "heading": "@Yourinstagram",
-        "description": "",
-        "header_size": "medium",
-        "header_alignment": "center",
-        "instagram_image_source": "generate_via_instagram_access_token",
-        "instagram_access_token": "IGAAUAa2YSIp1BZAFl1Wi0xUDMxNWFYRGlwbS1oaUFET1RmdHByak9oVG9CTEZAIM0Q4aDFYc0Fmemk3VlBvNWUxQllPdXJvd1IzTlVfUEVURWo0MlB4YkxvcGVyQ0hObkl5ZATRJdHNiUzlGSFpLOVRSX2NMRE4yVnk0ZAkJKNlp5dwZDZD",
-        "show_instagram_profile": false,
-        "instagram_profile_text": "Follow Us @cosnet",
-        "instagram_profile_link": "https://www.instagram.com/cosnet.co.in",
-        "image_ratio": "square",
-        "custom_ratio": "",
-        "image_animation": false,
-        "display_mode": "scroll",
-        "items_per_row": 4,
-        "column_gap": 10,
-        "show_arrow": true,
-        "carousel_pagination": "disable",
-        "infinite": false,
-        "autoplay": false,
-        "autorotate_speed": 5,
-        "reveal": false,
-        "carousel_on_mobile": true,
-        "items_per_row_mobile": 2,
-        "grid_moderm": false,
-        "speed": 60,
-        "img_width": 300,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "reset_spacing": true
-      }
-    },
     "icon_box_igFNYD": {
       "type": "icon-box",
       "blocks": {
@@ -885,7 +796,6 @@
     "products_carousel_BrKFhr",
     "product_testimonials_DyerjT",
     "17664914389582c61a",
-    "instagram_KRMxLN",
     "icon_box_igFNYD"
   ]
 }
