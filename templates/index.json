@@ -702,6 +702,7 @@
       "blocks": {
         "instafeed_app_block_7j7zbH": {
           "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "disabled": true,
           "settings": {
             "title": "Cosnet Insta feed.",
             "title_color": "",
@@ -721,6 +722,21 @@
       },
       "block_order": [
         "instafeed_app_block_7j7zbH"
+      ],
+      "settings": {}
+    },
+    "1766495293ed08ce5c": {
+      "type": "apps",
+      "blocks": {
+        "gsc_instagram_feed_instafeed_rMafPa": {
+          "type": "shopify://apps/gsc-instagram-feed/blocks/instafeed/96970b1b-b770-454f-b16b-51f47e1aa4ed",
+          "settings": {
+            "widget_id": "GSC-gPhskwHjSbScnjh"
+          }
+        }
+      },
+      "block_order": [
+        "gsc_instagram_feed_instafeed_rMafPa"
       ],
       "settings": {}
     },
@@ -796,6 +812,7 @@
     "products_carousel_BrKFhr",
     "product_testimonials_DyerjT",
     "17664914389582c61a",
+    "1766495293ed08ce5c",
     "icon_box_igFNYD"
   ]
 }
