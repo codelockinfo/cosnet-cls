@@ -69,7 +69,7 @@
         endif
       -%}
       <div
-        class="newsletter-popup__banner 1111 relative hidden block-md col-w-custom"
+        class="newsletter-popup__banner newsletter-popup__banner-show relative hidden block-md col-w-custom"
         style="--col-width: {{ section.settings.banner_width }}%;--aspect-ratio: {{ display_image.aspect_ratio }}"
       >
         {%- assign image_alt = display_image.alt | default: 'product' | escape -%}

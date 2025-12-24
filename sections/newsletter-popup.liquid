@@ -155,7 +155,7 @@
           </div>
           {% if newsletter_banner != blank %}
             <div
-              class="newsletter-popup__banner  000 relative hidden block-md col-w-custom"
+              class="newsletter-popup__banner  relative hidden block-md col-w-custom"
               style="--col-width: {{ banner_width }}%;--aspect-ratio: {{ newsletter_banner.aspect_ratio }}"
             >
               {%- assign image_alt = newsletter_banner.alt | default: 'banner_image' | escape -%}
