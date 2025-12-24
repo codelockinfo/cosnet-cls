@@ -101,7 +101,7 @@
           {% endif %}
           <a
             href="{% if promotion_url != blank %}{{ promotion_url }}{% else %}#{% endif %}"
-            class="btn-primary w-full discount btn-promotion my-25 inline-flex content-center gap-5 no-underline uppercase"
+            class="btn-primary w-full discount discount-btn-popup btn-promotion my-25 inline-flex content-center gap-5 no-underline uppercase"
             data-code="{{ code }}"
             {% if promotion_url != blank %}data-url="{{ promotion_url }}"{% endif %}
             aria-label="{{ 'popup.copy' | t }}"
