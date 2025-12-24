@@ -79,15 +79,7 @@
     "product_recommendations_heading": "",
     "minicart_type": "show_inside",
     "show_on_cart_page": true,
-    "select_product_recommendations": [
-      "10-niacinamide-with-1-zinc-pca",
-      "2-kojic-acid",
-      "02-salicylic-acid",
-      "hair-serum",
-      "ferulic-acid-vitamin-c-e",
-      "rice-water",
-      "15-l-ascorbic-acid-vitamin-c"
-    ],
+    "select_product_recommendations": [],
     "show_estimate_shipping_rates": false,
     "facebook": "https://www.facebook.com/share/1ANAPNbND1/",
     "instagram": "https://www.instagram.com/cosnet.co.in",
@@ -368,6 +360,11 @@
           "gkc_text_color": "#ffffff",
           "gk_image": true
         }
+      },
+      "13305437469741356523": {
+        "type": "shopify://apps/gsc-instagram-feed/blocks/embed/96970b1b-b770-454f-b16b-51f47e1aa4ed",
+        "disabled": false,
+        "settings": {}
       },
       "6868439170666289573": {
         "type": "shopify://apps/foxkit-sales-boost/blocks/foxkit-theme-helper/13f41957-6b79-47c1-99a2-e52431f06fff",
