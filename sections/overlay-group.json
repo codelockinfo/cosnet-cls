@@ -51,11 +51,16 @@
         "promotion_url": "shopify://products/2-kojic-acid",
         "banner_width": 50
       }
+    },
+    "1766570113570732cf": {
+      "type": "apps",
+      "settings": {}
     }
   },
   "order": [
     "before_you_leave_xTQDb4",
     "mobile_navigation_bar_GG8UWc",
-    "promotion_popup_4AEdn7"
+    "promotion_popup_4AEdn7",
+    "1766570113570732cf"
   ]
 }
