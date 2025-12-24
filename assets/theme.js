@@ -3354,10 +3354,14 @@ class PromotionPopup extends HTMLElement {
       cp.forEach((e) => {
         e.addEventListener('click', (el) => {
           el.preventDefault();
+          const promotionUrl = e?.dataset.url;
           navigator.clipboard.writeText(e?.dataset.code);
           e.classList.add('action-copy');
           setTimeout(() => {
             e.classList.remove('action-copy');
+            if (promotionUrl && promotionUrl !== '#') {
+              window.location.href = promotionUrl;
+            }
           }, 1500);
         });
       });

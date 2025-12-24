@@ -8,6 +8,7 @@
   assign background_image = section_st.promotion_banner
   assign promotion_content = section_st.promotion_content
   assign show_promotion_select = section_st.show_promotion_select
+  assign promotion_url = section_st.promotion_url
 
   assign show = 'hidden'
   if show_promotion_select == 'show_promotion_homepage'
@@ -18,6 +19,18 @@
     assign show = 'hidden'
   else
     assign show = 'show-on-all-pages'
+  endif
+
+  assign product_image = null
+  if background_image == blank and promotion_url != blank
+    assign url_parts = promotion_url | split: '/products/'
+    if url_parts.size > 1
+      assign product_handle = url_parts[1] | split: '?' | first | split: '#' | first
+      assign url_product = all_products[product_handle]
+      if url_product != blank and url_product.featured_image != blank
+        assign product_image = url_product.featured_image
+      endif
+    endif
   endif
 -%}
 {% liquid
@@ -48,22 +61,28 @@
     class="popup-content flex{% if enable_rtl %} flex-row-reverse{% endif %}"
     style="{{ style | strip | strip_newlines }}"
   >
-    {% if background_image != blank %}
+    {% if background_image != blank or product_image != blank %}
+      {%- liquid
+        assign display_image = background_image
+        if background_image == blank
+          assign display_image = product_image
+        endif
+      -%}
       <div
         class="newsletter-popup__banner relative hidden block-md col-w-custom"
-        style="--col-width: {{ section.settings.banner_width }}%;--aspect-ratio: {{ background_image.aspect_ratio }}"
+        style="--col-width: {{ section.settings.banner_width }}%;--aspect-ratio: {{ display_image.aspect_ratio }}"
       >
-        {%- assign image_alt = background_image.alt | default: 'product' | escape -%}
+        {%- assign image_alt = display_image.alt | default: 'product' | escape -%}
         {% render 'responsive-image',
           type: 'other',
-          image: background_image,
+          image: display_image,
           image_alt: image_alt,
           class: 'absolute inset-0 w-full h-full object-fit-cover'
         %}
       </div>
     {% endif %}
     <div class="promotion__popup-content flex-1 relative">
-      <div class="content-promotion text-center p-1025-40 p-30 {% if background_image != blank %}absolute-md inset-0 flex flex-column{% endif %} overflow-y-auto custom-scrollbar h-full w-full">
+      <div class="content-promotion text-center p-1025-40 p-30 {% if background_image != blank or product_image != blank %}absolute-md inset-0 flex flex-column{% endif %} overflow-y-auto custom-scrollbar h-full w-full">
         <div class="my-auto">
           <div class="section-header">
             {%- if sub_title != blank -%}
@@ -81,22 +100,13 @@
             </div>
           {% endif %}
           <a
-            href="#"
+            href="{% if promotion_url != blank %}{{ promotion_url }}{% else %}#{% endif %}"
             class="btn-primary w-full discount btn-promotion my-25 inline-flex content-center gap-5 no-underline uppercase"
             data-code="{{ code }}"
+            {% if promotion_url != blank %}data-url="{{ promotion_url }}"{% endif %}
             aria-label="{{ 'popup.copy' | t }}"
           >
-            <svg width="16" height="14" fill="none">
-              <path fill="currentColor" fill-rule="evenodd" d="M14.286 4.667v7.583H4.57V4.667h9.715ZM16 4.375c0-.805-.64-1.458-1.429-1.458H4.286c-.79 0-1.429.653-1.429 1.458v8.167c0 .805.64 1.458 1.429 1.458H14.57c.79 0 1.429-.653 1.429-1.458V4.375Z" clip-rule="evenodd"/><path fill="currentColor" fill-rule="evenodd" d="M13.43.875A.866.866 0 0 0 12.573 0H1.43C1.05 0 .687.154.42.427A1.474 1.474 0 0 0 0 1.458V10.5c0 .484.384.875.857.875a.866.866 0 0 0 .857-.875V1.75h10.857a.866.866 0 0 0 .858-.874Z" clip-rule="evenodd"/>
-            </svg>
-            <span class="text relative">
-              <span class="copied-action">
-                {{ code }}
-              </span>
-              <span class="copied-success absolute invisible inset-y-0 left-0 inline-flex content-center">
-                {{- 'popup.copied' | t -}}
-              </span>
-            </span>
+          Click here
           </a>
           <div class="do-not-show-again pointer fs-small">
             <span class="border-bottom">{{ 'popup.do_not' | t }}</span>
@@ -175,6 +185,12 @@
       "label": "t:sections.promotion-popup.settings.promotion_content.label",
       "default": "Up to <span>50% Off<\/span> when using code [promotion_code]",
       "info": "t:sections.promotion-popup.settings.promotion_content.info"
+    },
+    {
+      "type": "url",
+      "id": "promotion_url",
+      "label": "Promotion URL",
+      "info": "Enter product or page URL. If banner image is not set, product image will be used automatically."
     },
     {
       "type": "header",
