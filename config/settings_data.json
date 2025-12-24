@@ -79,7 +79,7 @@
     "choose_gift_wrap_product": "",
     "product_recommendations_heading": "Related Product",
     "minicart_type": "show_beside",
-    "show_on_cart_page": true,
+    "show_on_cart_page": false,
     "product_recommendations_type": "auto",
     "select_product_recommendations": [
       "10-niacinamide-with-1-zinc-pca",
