@@ -622,7 +622,7 @@
         {% if type != 'product-set' %}
           <a
             aria-label="{{ card_product.title }}"
-            class="product-item__name {% if settings.product_name_text_line != 'unset' %}limited-line{% endif %} {{ settings.product_name_text_transform }} heading-style no-underline fs-custom block lh-normal {% if type == 'bundle' %} mb-sm-10{% endif %}"
+            class="product-item__name product-item__name-in-cart {% if settings.product_name_text_line != 'unset' %}limited-line{% endif %} {{ settings.product_name_text_transform }} heading-style no-underline fs-custom block lh-normal {% if type == 'bundle' %} mb-sm-10{% endif %}"
             style="--font-size: {{ settings.product_size }};{% if settings.product_name_text_line != 'unset' %}--line-clamp: {{ settings.product_name_text_line }}{% endif %}"
             {% if template_disable_product_url == true %}
               role="link" aria-disabled="true"

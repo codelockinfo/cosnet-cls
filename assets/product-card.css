@@ -438,16 +438,16 @@ media-gallery .external_video iframe model-viewer {
 .product-item iframe{
   pointer-events: none;
 }
-/* .product-item__name-in-cart{
+ .template-cart  .cart_page-recommend .product-item__name-in-cart , .cart-recommend-item .product-item__name-in-cart{
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.4;
   font-size: 14px;
   color: #00192f;
-} */
+} 
 .hidden-on-load-cart{
   border: 1px solid #00192f;
   padding: 2px 25px;
