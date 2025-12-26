@@ -76,7 +76,7 @@
     "free_shipping_minimum": "150",
     "enable_cart_note": false,
     "choose_gift_wrap_product": "digital-gift-card",
-    "product_recommendations_heading": "",
+    "product_recommendations_heading": "You Might Also Like",
     "minicart_type": "show_inside",
     "show_on_cart_page": true,
     "select_product_recommendations": [
