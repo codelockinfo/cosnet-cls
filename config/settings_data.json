@@ -103,7 +103,7 @@
     "scroll_animation": "slide_in",
     "store_phone": "+91 70167 67738",
     "store_email": "help.cosnet@gmail.com",
-    "store_address": "Block No.  11-12 Ramdev Campus, behind HP petrol pump, BRTS canal road, Surat, Gujarat 395010",
+    "store_address": "Shop No. 209, Polaris Mall Canal Road, Parvat Patiya Surat, Gujarat – 395011 India",
     "store_page": "our-store",
     "heading_cookies": "",
     "content_cookies": "<p>We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffics. By clicking \"<strong>Allow Cookies</strong>\" you consent to our use of cookie.</p>",
@@ -371,6 +371,11 @@
       },
       "13305437469741356523": {
         "type": "shopify://apps/gsc-instagram-feed/blocks/embed/96970b1b-b770-454f-b16b-51f47e1aa4ed",
+        "disabled": false,
+        "settings": {}
+      },
+      "4090771392943522038": {
+        "type": "shopify://apps/toastibar/blocks/app-embed/28a475c6-f06d-46d4-b40a-df8d869255ef",
         "disabled": false,
         "settings": {}
       }

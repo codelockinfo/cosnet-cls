@@ -1,1 +1,159 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"footer","blocks":{"store_info_tUhcyD":{"type":"store_info","settings":{"image":"shopify:\/\/shop_images\/Untitled_design.png","image_width":120,"store_heading":"","store_description":"<p>We only carry designs we believe in ethically and <br\/>aesthetically – original, authentic pieces that are made to last. <a href=\"\/pages\/about-us\" title=\"About us\"><span style=\"text-decoration:underline\"><strong>Learn more<\/strong><\/span><\/a><\/p>","store_address":true,"store_phone":true,"store_email":true,"content_width":"33.333%"}},"link_list_JTq77M":{"type":"link_list","settings":{"heading":"Our Company","menu":"footer","content_width":"16%"}},"link_list_x4zwRH":{"type":"link_list","settings":{"heading":"Quick links","menu":"customer-account-main-menu","content_width":"16%"}},"link_list_LETFXJ":{"type":"link_list","disabled":true,"settings":{"heading":"Shop Categories","menu":"","content_width":"16%"}},"newsletter_Rk8BD6":{"type":"newsletter","settings":{"heading":"Sign Up to Newsletter","description":"Subscribe for store updates and discounts.","email_placeholder":"Enter your email...","button_label":"Sign Up","note":"***By entering the e-mail you accept the<a href=\"\/policies\/terms-of-service\" target=\"_blank\" title=\"Terms of Service\"> <strong>terms and conditions<\/strong><\/a> and the <a href=\"\/policies\/privacy-policy\" target=\"_blank\" title=\"Privacy Policy\"><strong>privacy policy.<\/strong><\/a>","design":"default","newsletter_show_social":true,"content_width":"33.333%"}}},"block_order":["store_info_tUhcyD","link_list_JTq77M","link_list_x4zwRH","link_list_LETFXJ","newsletter_Rk8BD6"],"custom_css":[".footer__block-info svg {height: 30px; width: 30px;}"],"settings":{"section_width":"fluid_container","color_scheme":"scheme-5af42e36-ad1c-4052-a1c7-25170695ca08","enable_back_top":true,"separator_line":"unset","enable_country_selector":true,"enable_language_selector":false,"enable_follow_on_shop":true,"show_social":false,"payment_enable":true,"payment_width":340,"copyright_text":"© 2025 Cosnet. All rights reserved.","footer_heading_size":18,"padding_top":60,"padding_bottom":45,"reset_spacing_on_homepage":true}}},"order":["footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "1766749831fb72ba3b": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_1a0f3ce_yN4WrH": {
+          "type": "ai_gen_block_1a0f3ce",
+          "settings": {
+            "heading": "",
+            "description": "<h4>CONTACT INFORMATION</h4><p><strong>Company Name:</strong> NENCY CREATION<br/><strong>GSTIN:</strong> 24GMDPM8509K1ZO <br/><strong>Registered Address: </strong>C/103, Krishan Kunj Residency, UTRAN ROAD, Surat, Gujarat, 394105<br/><strong>Phone:</strong> 7016767738<br/><strong>Email: help.cosnet@gmail.com</strong><br/><strong>Contact Form: </strong><a href=\"https://cosnet.co.in/pages/contact\" target=\"_blank\" title=\"https://cosnet.co.in/pages/contact\"><strong>here</strong></a><a href=\"https://1strips.com/pages/contact\" title=\"https://1strips.com/pages/contact\"><br/></a><strong>Opening Hours: </strong>Monday to Saturday - 9:00 AM to 6:00 PM(IST)<br/><strong>Response Hours: </strong>Our customer service team typically responds within <strong>48 hours from Monday to Saturday</strong></p>",
+            "show_phone": false,
+            "phone_label": "Call us",
+            "phone": "",
+            "show_email": false,
+            "email_label": "Email us",
+            "email": "info@company.com",
+            "show_address": false,
+            "address_label": "Visit us",
+            "address": "123 Business Street, Suite 100, City, State 12345",
+            "show_hours": false,
+            "hours_label": "Business hours",
+            "hours": "Monday - Friday: 9:00 AM - 6:00 PM",
+            "container_width": 1200,
+            "columns_desktop": 4,
+            "columns_tablet": 2,
+            "columns_mobile": "1",
+            "text_alignment": "center",
+            "padding_top": 50,
+            "padding_bottom": 50,
+            "padding_horizontal": 20,
+            "spacing_between_sections": 30,
+            "grid_gap": 30,
+            "heading_spacing": 15,
+            "icon_spacing": 15,
+            "item_title_spacing": 10,
+            "item_padding": 25,
+            "item_border_radius": 10,
+            "item_background": "#ffffff",
+            "item_border_color": "#ebebeb",
+            "heading_size": 32,
+            "description_size": 16,
+            "item_title_size": 18,
+            "item_text_size": 15,
+            "icon_size": 40,
+            "background_color": "#f5f5f5",
+            "heading_color": "#111111",
+            "text_color": "#444444",
+            "icon_color": "#111111",
+            "link_color": "#111111",
+            "link_hover_color": "#d0473e"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_1a0f3ce_yN4WrH"
+      ],
+      "settings": {}
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "store_info_tUhcyD": {
+          "type": "store_info",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design.png",
+            "image_width": 120,
+            "store_heading": "",
+            "store_description": "<p><strong>Company Name</strong>: <strong>NENCY CREATION </strong>GSTIN: 24GMDPM8509K1ZO </p><p><strong>Address</strong>- Shop No. 209, Polaris Mall Canal Road, Parvat Patiya Surat, Gujarat – 395011 India</p><p><strong>Phone</strong>: 7016767738 </p><p><strong>Email</strong>: help.cosnet@gmail.com </p><p><strong>Contact Form</strong>: here </p><p><strong>Opening Hours</strong>: Monday to Saturday - 9:00 AM to 6:00 PM(IST) </p><p><strong>Response Hours</strong>: Our customer service team typically responds within 48 hours from Monday to Saturday</p>",
+            "store_address": false,
+            "store_phone": false,
+            "store_email": false,
+            "content_width": "33.333%"
+          }
+        },
+        "link_list_JTq77M": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Our Company",
+            "menu": "footer",
+            "content_width": "16%"
+          }
+        },
+        "link_list_x4zwRH": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "customer-account-main-menu",
+            "content_width": "16%"
+          }
+        },
+        "link_list_LETFXJ": {
+          "type": "link_list",
+          "disabled": true,
+          "settings": {
+            "heading": "Shop Categories",
+            "menu": "",
+            "content_width": "16%"
+          }
+        },
+        "newsletter_Rk8BD6": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Sign Up to Newsletter",
+            "description": "Subscribe for store updates and discounts.",
+            "email_placeholder": "Enter your email...",
+            "button_label": "Sign Up",
+            "note": "***By entering the e-mail you accept the<a href=\"/policies/terms-of-service\" target=\"_blank\" title=\"Terms of Service\"> <strong>terms and conditions</strong></a> and the <a href=\"/policies/privacy-policy\" target=\"_blank\" title=\"Privacy Policy\"><strong>privacy policy.</strong></a>",
+            "design": "default",
+            "newsletter_show_social": true,
+            "content_width": "33.333%"
+          }
+        }
+      },
+      "block_order": [
+        "store_info_tUhcyD",
+        "link_list_JTq77M",
+        "link_list_x4zwRH",
+        "link_list_LETFXJ",
+        "newsletter_Rk8BD6"
+      ],
+      "custom_css": [
+        ".footer__block-info svg {height: 30px; width: 30px;}"
+      ],
+      "settings": {
+        "section_width": "fluid_container",
+        "color_scheme": "scheme-5af42e36-ad1c-4052-a1c7-25170695ca08",
+        "enable_back_top": true,
+        "separator_line": "unset",
+        "enable_country_selector": true,
+        "enable_language_selector": false,
+        "enable_follow_on_shop": true,
+        "show_social": false,
+        "payment_enable": true,
+        "payment_width": 340,
+        "copyright_text": "© 2025 Cosnet. All rights reserved.",
+        "footer_heading_size": 18,
+        "padding_top": 60,
+        "padding_bottom": 45,
+        "reset_spacing_on_homepage": true
+      }
+    }
+  },
+  "order": [
+    "1766749831fb72ba3b",
+    "footer"
+  ]
+}
