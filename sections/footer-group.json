@@ -77,10 +77,10 @@
             "image": "shopify://shop_images/Untitled_design.png",
             "image_width": 120,
             "store_heading": "",
-            "store_description": "<p>We only carry designs we believe in ethically and <br/>aesthetically – original, authentic pieces that are made to last. <a href=\"/pages/about-us\" title=\"About us\"><span style=\"text-decoration:underline\"><strong>Learn more</strong></span></a></p>",
-            "store_address": true,
-            "store_phone": true,
-            "store_email": true,
+            "store_description": "<p><strong>Company Name</strong>: <strong>NENCY CREATION </strong>GSTIN: 24GMDPM8509K1ZO </p><p><strong>Address</strong>- Shop No. 209, Polaris Mall Canal Road, Parvat Patiya Surat, Gujarat – 395011 India</p><p><strong>Phone</strong>: 7016767738 </p><p><strong>Email</strong>: help.cosnet@gmail.com </p><p><strong>Contact Form</strong>: here </p><p><strong>Opening Hours</strong>: Monday to Saturday - 9:00 AM to 6:00 PM(IST) </p><p><strong>Response Hours</strong>: Our customer service team typically responds within 48 hours from Monday to Saturday</p>",
+            "store_address": false,
+            "store_phone": false,
+            "store_email": false,
             "content_width": "33.333%"
           }
         },
