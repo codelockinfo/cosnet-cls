@@ -759,7 +759,7 @@
                 </select-option>
               {%- else -%}
                 {% comment %} Case add cart directly {% endcomment %}
-                <product-form class="product-item__product-form grow-1 max-w-custom" style="--max-width: 23rem;">
+                <product-form class="product-item__product-form cart-add-to-item grow-1 max-w-custom" style="--max-width: 23rem;">
                   {%- form 'product',
                     card_product,
                     id: product_form_id,
@@ -777,7 +777,7 @@
                       id="{{ product_form_id }}-submit"
                       type="submit"
                       name="add"
-                      class="product-item__button-submit bls-add-cart-list transition btn-primary block relative text-center w-full"
+                      class="product-item__button-submit product-item__button-submit-to-cart bls-add-cart-list transition btn-primary block relative text-center w-full"
                       style="--max-width: 23rem;"
                       aria-haspopup="dialog"
                       aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
@@ -794,9 +794,10 @@
                         disabled
                       {% endif %}
                     >
-                      <span class="hidden-on-load">
+                      <span class="hidden-on-load hidden-on-load-cart">
                         {%- if card_product.selected_or_first_available_variant.available -%}
-                          {{ 'products.product.actions.add_to_cart.default.label' | t }}
+                         {% comment %} {{ 'products.product.actions.add_to_cart.default.label' | t }}{% endcomment %}
+                         + Add
                         {%- else -%}
                           {{ 'products.product.actions.add_to_cart.sold_out.label' | t }}
                         {%- endif -%}

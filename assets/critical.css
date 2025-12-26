@@ -2824,7 +2824,7 @@ header-inner .button-localization {
   padding: 0 0 3px;
   width: auto;
 }
-.cart-recommend .bls-add-cart-list::before {
+/* .cart-recommend .bls-add-cart-list::before {
   content: "";
   position: absolute;
   height: var(--height, 2px);
@@ -2833,7 +2833,7 @@ header-inner .button-localization {
   bottom: 0;
   left: 0;
   transition: var(--transition);
-}
+} */
 .footer:not(.remove_spacing-on-home) {
   margin-top: calc(var(--section-spacing) - 1.8rem);
 }

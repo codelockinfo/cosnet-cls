@@ -367,5 +367,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     font-size: 12px !important;
   }
 }
+.swiper-slide-cart-item{
+  width: 100% !important;
+  max-width: 240px !important;
+  margin-right: 10px !important;
+}
+.cart-recommend-item{
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  margin: 5px;
+  border-radius: 10px;
+}
 
+/* Fix pagination and prevent empty space in cart upsell */
+.swiper-cart-upsell {
+  overflow: hidden;
+}
+
+.swiper-cart-upsell .swiper-wrapper {
+  align-items: flex-start;
+}
+{%comment%}.price-heading_weight-content{
+  color: #00192f !important;
+}{%endcomment%}
 </style>
