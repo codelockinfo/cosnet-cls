@@ -365,6 +365,11 @@
         "type": "shopify://apps/gsc-instagram-feed/blocks/embed/96970b1b-b770-454f-b16b-51f47e1aa4ed",
         "disabled": false,
         "settings": {}
+      },
+      "4090771392943522038": {
+        "type": "shopify://apps/toastibar/blocks/app-embed/28a475c6-f06d-46d4-b40a-df8d869255ef",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
