@@ -47,10 +47,10 @@ cart-remove-button .underline {
   .page__cart-item :where(.dark-grey) {
     color: #000000 !important;
   }
-  .cart-item__details .cart_info {
+  /* .cart-item__details .cart_info {
     display: flex !important;
     justify-content: space-between;
-  }
+  } */
   .cart-item__details {
     padding: 20px 0 5px !important;
   }
@@ -105,4 +105,21 @@ cart-remove-button .underline {
 }
 body:has(cart-items.is-empty) .page-title {
   display: none;
+}
+.cart-remove-button-icon{
+  text-align: left;
+}
+.cart_info {
+  margin-inline-start: 0 !important;
+}
+@media screen and (max-width: 767.98px){
+  .cart-remove-button-icon{
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 50px;
+  }
+  .cart-options-bottom{
+    margin-bottom: 0 !important;
+  }
 }
