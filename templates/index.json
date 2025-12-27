@@ -638,7 +638,7 @@
             "author_rating": 5,
             "author_text": "<p><br/>This Vitamin C serum feels lightweight and absorbs quickly. My skin looks brighter, smoother, and more even within weeks. 🤗</p>",
             "select_product": "15-l-ascorbic-acid-vitamin-c",
-            "author_name": "Cameron Smith."
+            "author_name": "Samaira Gupta"
           }
         },
         "testimonials_items_3trnNN": {
@@ -648,7 +648,7 @@
             "author_rating": 5,
             "author_text": "<p>After using this serum for <strong>two to three weeks</strong>, my skin looks brighter and more even, with dark spots starting to fade. It absorbs quickly, feels gentle, and causes no irritation.</p>",
             "select_product": "2-kojic-acid",
-            "author_name": "Algistino Lionel."
+            "author_name": "Megha Varshney"
           }
         },
         "testimonials_items_xDzhkj": {
@@ -658,7 +658,7 @@
             "author_rating": 5,
             "author_text": "<p>Within <strong>two to three weeks</strong>, my skin felt smoother and looked more radiant, with a clearer and more even tone. The serum is light, non-sticky, and works well for daily use without causing irritation.😍</p>",
             "select_product": "ferulic-acid-vitamin-c-e",
-            "author_name": "Carie-Gosée H."
+            "author_name": "Roopali Srivastava"
           }
         }
       },
@@ -699,30 +699,6 @@
     },
     "17664914389582c61a": {
       "type": "apps",
-      "blocks": {
-        "instafeed_app_block_7j7zbH": {
-          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
-          "disabled": true,
-          "settings": {
-            "title": "Cosnet Insta feed.",
-            "title_color": "",
-            "title_size_v2": 0,
-            "alignment": "center",
-            "instafeed_margin_top": 0,
-            "instafeed_margin_bottom": 0,
-            "instafeed_margin_sides": 0,
-            "show_instagram_link": false,
-            "link_alignment": "left",
-            "link_color": "#000000",
-            "background_color": "",
-            "feed_id": "",
-            "html_area": ""
-          }
-        }
-      },
-      "block_order": [
-        "instafeed_app_block_7j7zbH"
-      ],
       "settings": {}
     },
     "1766495293ed08ce5c": {
