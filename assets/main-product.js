@@ -1255,9 +1255,9 @@ class SlideSectionProductSet extends HTMLElement {
     const _this = this;
     var autoplaying = _this?.dataset.autoplay === "true";
     const loop = _this?.dataset.loop === "true";
-    const itemDesktop = _this?.dataset.desktop ? _this?.dataset.desktop : 4;
-    var itemTablet = _this?.dataset.tablet ? _this?.dataset.tablet : "";
-    const itemMobile = _this?.dataset.mobile ? _this?.dataset.mobile : 1;
+    const itemDesktop = _this?.dataset.desktop ? parseFloat(_this?.dataset.desktop) : 4;
+    var itemTablet = _this?.dataset.tablet ? parseFloat(_this?.dataset.tablet) : "";
+    const itemMobile = _this?.dataset.mobile ? parseFloat(_this?.dataset.mobile) : 1;
     const direction = _this?.dataset.direction
       ? _this?.dataset.direction
       : "horizontal";

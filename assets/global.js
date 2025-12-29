@@ -458,10 +458,10 @@ class SlideSection extends HTMLElement {
     const _this = this;
     var autoplaying = _this?.dataset.autoplay === "true";
     const loop = _this?.dataset.loop === "true";
-    const itemDesktop = _this?.dataset.desktop ? parseInt(_this?.dataset.desktop) : 4;
+    const itemDesktop = _this?.dataset.desktop ? parseFloat(_this?.dataset.desktop) : 4;
     const mousewheel = _this?.dataset.mousewheel === 'true';
-    var itemTablet = _this?.dataset.tablet ? parseInt(_this?.dataset.tablet) : "";
-    const itemMobile = _this?.dataset.mobile ? parseInt(_this?.dataset.mobile) : 1;
+    var itemTablet = _this?.dataset.tablet ? parseFloat(_this?.dataset.tablet) : "";
+    const itemMobile = _this?.dataset.mobile ? parseFloat(_this?.dataset.mobile) : 1;
     const direction = _this?.dataset.direction ? _this?.dataset.direction : 'horizontal';
     var autoplaySpeed = _this?.dataset.autoplaySpeed
       ? _this?.dataset.autoplaySpeed * 1000
@@ -923,9 +923,9 @@ class SlideLazyLoad {
     const _this = el;
     var autoplaying = _this?.dataset.autoplay === "true";
     const loop = _this?.dataset.loop === "true";
-    const itemDesktop = _this?.dataset.desktop ? _this?.dataset.desktop : 4;
-    var itemTablet = _this?.dataset.tablet ? _this?.dataset.tablet : "";
-    const itemMobile = _this?.dataset.mobile ? _this?.dataset.mobile : 1;
+    const itemDesktop = _this?.dataset.desktop ? parseFloat(_this?.dataset.desktop) : 4;
+    var itemTablet = _this?.dataset.tablet ? parseFloat(_this?.dataset.tablet) : "";
+    const itemMobile = _this?.dataset.mobile ? parseFloat(_this?.dataset.mobile) : 1;
     const direction = _this?.dataset.direction
       ? _this?.dataset.direction
       : "horizontal";

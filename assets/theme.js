@@ -7930,7 +7930,7 @@ class SlideWithThumbs extends HTMLElement {
   initSlide() {
     var autoplaying = this?.dataset.autoplay === 'true';
     const loop = this?.dataset.loop === 'true';
-    const itemMobile = this?.dataset.mobile ? this?.dataset.mobile : 1;
+    const itemMobile = this?.dataset.mobile ? parseFloat(this?.dataset.mobile) : 1;
     var direction = this?.dataset.direction
       ? this?.dataset.direction
       : 'horizontal';
