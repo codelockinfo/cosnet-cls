@@ -25,7 +25,7 @@
       aria-hidden="false"
     >
       <p class="mt-8 mb-22 mx-0 text-center">{{ 'customer.login_page.sign_in_info' | t }}</p>
-      <form accept-charset="UTF-8" action="{{ routes.account_login_url }}" method="post" class="auth-form auth-form-2">
+      <form accept-charset="UTF-8" action="{{ routes.account_login_url }}" method="post" class="auth-form auth-form-2 customer-login-form-for-loader">
         <input name="form_type" type="hidden" value="customer_login">
         <input name="utf8" type="hidden" value="✓">
         <div class="form-field form-group  mb-10">

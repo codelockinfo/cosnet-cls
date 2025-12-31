@@ -85,7 +85,7 @@
             {{ 'customer.recover_password.success' | t }}
           </p>
         {% endif %}
-        {%- form 'customer_login', class: 'customer-login-form' -%}
+        {%- form 'customer_login', class: 'customer-login-form customer-login-form-for-loader' -%}
           {%- if form.errors -%}
             {%- assign message = form.errors.messages.form -%}
             <p class="error lh-normal flex gap-10">
