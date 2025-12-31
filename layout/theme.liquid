@@ -474,15 +474,37 @@ document.addEventListener("DOMContentLoaded", function () {
             </svg>
   `;
 
-  const form = document.querySelector(".customer-login-form-for-loader");
-  const submitBtn = document.getElementById("LoginSubmitBtn");
-
-  if (form && submitBtn) {
-    form.addEventListener("submit", function () {
-      submitBtn.classList.add("btn-loading");
-      submitBtn.disabled = true;
+  // Handle loader for all login forms (including popup) using event delegation
+  // This works for dynamically loaded content
+  document.addEventListener('submit', function(e) {
+    const form = e.target;
+    if (form && form.classList.contains('customer-login-form-for-loader')) {
+      const submitBtn = form.querySelector('#LoginSubmitBtn');
+      if (submitBtn) {
+        submitBtn.classList.add('btn-loading');
+        submitBtn.disabled = true;
+      }
+    }
+  }, true); // Use capture phase to catch early
+  
+  // Also setup on page load for immediate forms
+  function setupLoginLoader() {
+    const forms = document.querySelectorAll(".customer-login-form-for-loader");
+    
+    forms.forEach(function(form) {
+      const submitBtn = form.querySelector("#LoginSubmitBtn");
+      if (submitBtn && !submitBtn.hasAttribute('data-loader-setup')) {
+        submitBtn.setAttribute('data-loader-setup', 'true');
+        form.addEventListener("submit", function () {
+          submitBtn.classList.add("btn-loading");
+          submitBtn.disabled = true;
+        });
+      }
     });
   }
+  
+  // Setup on page load
+  setupLoginLoader();
   document.querySelectorAll(".toggle-password").forEach(function (btn) {
 
   btn.innerHTML = closeEye;

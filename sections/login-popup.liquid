@@ -232,3 +232,57 @@
     </div>
   </div>
 </div>
+<script>
+// Loader for login popup - uses event delegation to work with dynamically loaded content
+(function() {
+  // Event delegation - catches form submit even if form is loaded dynamically
+  document.addEventListener('submit', function(e) {
+    const form = e.target;
+    if (form && form.classList.contains('customer-login-form-for-loader')) {
+      // Check if this form is in the popup modal
+      const isInModal = form.closest('.tingle-modal') || 
+                        form.closest('.login-popup-modal') || 
+                        form.closest('#login-popup');
+      
+      if (isInModal) {
+        const submitBtn = form.querySelector('#LoginSubmitBtn');
+        if (submitBtn) {
+          submitBtn.classList.add('btn-loading');
+          submitBtn.disabled = true;
+        }
+      }
+    }
+  }, true); // Use capture phase
+  
+  // Also setup directly when popup loads (backup method)
+  function setupDirectLoader() {
+    const popupForm = document.querySelector('#login-popup .customer-login-form-for-loader') || 
+                      document.querySelector('.login-popup-modal .customer-login-form-for-loader') ||
+                      document.querySelector('.tingle-modal .customer-login-form-for-loader');
+    
+    if (popupForm) {
+      const submitBtn = popupForm.querySelector('#LoginSubmitBtn');
+      if (submitBtn && !submitBtn.hasAttribute('data-popup-loader-setup')) {
+        submitBtn.setAttribute('data-popup-loader-setup', 'true');
+        popupForm.addEventListener('submit', function(e) {
+          submitBtn.classList.add('btn-loading');
+          submitBtn.disabled = true;
+        });
+      }
+    }
+  }
+  
+  // Run immediately and also watch for modal content
+  setupDirectLoader();
+  
+  // Watch for modal being added to DOM
+  const observer = new MutationObserver(function() {
+    setupDirectLoader();
+  });
+  
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
