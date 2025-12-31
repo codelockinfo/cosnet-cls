@@ -108,15 +108,15 @@
           </div>
           {%- if form.password_needed -%}
             <div class="password-wrapper">
-  <input
-    type="password"
-    name="customer[password]"
-    id="CustomerPassword"
-    placeholder="{{ 'customer.login_page.placeholder_pass' | t }}"
-    required
-  />
-  <span class="toggle-password" data-target="CustomerPassword"></span>
-</div>
+        <input
+         type="password"
+         name="customer[password]"
+         id="CustomerPassword"
+         placeholder="{{ 'customer.login_page.placeholder_pass' | t }}"
+         required
+         />
+        <span class="toggle-password" data-target="CustomerPassword"></span>
+        </div>
           {% endif %}
           <div class="form-actions mt-20">
             <a href="#recover" class="forget-password no-underline">
