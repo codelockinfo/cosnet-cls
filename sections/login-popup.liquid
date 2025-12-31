@@ -234,17 +234,21 @@
 </div>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
- 
-  /* Loader on submit */
   const form = document.querySelector(".customer-login-form");
   const submitBtn = document.getElementById("LoginSubmitBtn-2");
+
   if (form && submitBtn) {
     form.addEventListener("submit", function () {
+      // Add loader class
       submitBtn.classList.add("btn-loading");
       submitBtn.disabled = true;
+
+      // Optional: add a small delay to ensure spinner is visible before page reload
+      setTimeout(() => {
+        form.submit();
+      }, 100); // 100ms delay
     });
   }
-
 });
 </script>
 <style>
