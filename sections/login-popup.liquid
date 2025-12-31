@@ -75,7 +75,7 @@
         <div class="form-actions auth-actions mt-20 text-center">
           <button
             type="submit"
-             id="LoginSubmitBtn"
+             id="LoginSubmitBtn-2"
             class="button button-login btn btn-primary w-full"
             value="{{ 'customer.login_page.title' | t }}"
             name="{{ 'customer.login_page.title' | t }}"
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
  
   /* Loader on submit */
   const form = document.querySelector(".customer-login-form");
-  const submitBtn = document.getElementById("LoginSubmitBtn");
+  const submitBtn = document.getElementById("LoginSubmitBtn-2");
 
   if (form && submitBtn) {
     form.addEventListener("submit", function () {
@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
   user-select: none;
   z-index: 10;
 }
-#LoginSubmitBtn {
+#LoginSubmitBtn-2 {
   position: relative;
 }
 
