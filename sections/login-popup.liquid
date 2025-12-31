@@ -231,3 +231,19 @@
     </div>
   </div>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+ 
+  /* Loader on submit */
+  const form = document.querySelector(".customer-login-form");
+  const submitBtn = document.getElementById("LoginSubmitBtn");
+
+  if (form && submitBtn) {
+    form.addEventListener("submit", function () {
+      submitBtn.classList.add("btn-loading");
+      submitBtn.disabled = true;
+    });
+  }
+
+});
+</script>

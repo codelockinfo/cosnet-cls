@@ -389,19 +389,3 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 </style>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
- 
-  /* Loader on submit */
-  const form = document.querySelector(".customer-login-form");
-  const submitBtn = document.getElementById("LoginSubmitBtn");
-
-  if (form && submitBtn) {
-    form.addEventListener("submit", function () {
-      submitBtn.classList.add("btn-loading");
-      submitBtn.disabled = true;
-    });
-  }
-
-});
-</script>
