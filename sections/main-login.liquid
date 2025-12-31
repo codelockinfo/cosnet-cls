@@ -107,33 +107,30 @@
             >
           </div>
           {%- if form.password_needed -%}
-            <div class="form-group mb-20 flex flex-column  form-field">
-              <label class="form-label mb-3 visually-hidden" for="CustomerPassword">
-                {{ 'customer.login_page.password' | t }}
-                <span class="required">*</span>
-              </label>
-              <input
-                type="password"
-                name="customer[password]"
-                id="CustomerPassword"
-                placeholder="{{ 'customer.login_page.placeholder_pass' | t }}"
-                required
-              >
-            </div>
+            <div class="password-wrapper">
+  <input
+    type="password"
+    name="customer[password]"
+    id="CustomerPassword"
+    placeholder="{{ 'customer.login_page.placeholder_pass' | t }}"
+    required
+  />
+  <span class="toggle-password" data-target="CustomerPassword">👁</span>
+</div>
           {% endif %}
           <div class="form-actions mt-20">
             <a href="#recover" class="forget-password no-underline">
               <span class="text">{{ 'customer.login_page.forgot_password' | t }}</span>
             </a>
-  <button
-  type="submit"
-  id="LoginSubmitBtn"
-  class="btn-primary block no-underline mt-30 w-full"
->
-  <span class="btn-text">
-    {{ 'customer.login_page.submit' | t }}
-  </span>
-</button>
+          <button
+          type="submit"
+          id="LoginSubmitBtn"
+          class="btn-primary block no-underline mt-30 w-full"
+        >
+          <span class="btn-text">
+            {{ 'customer.login_page.submit' | t }}
+          </span>
+        </button>
           </div>
         {%- endform -%}
       </div>
@@ -155,9 +152,33 @@
   </div>
 </div>
 <style>
+/* Loader */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* icon ke liye jagah */
+  border-radius: 30px; /* aapke design ke hisab se adjust karo */
+  height: 50px; /* apne input ki height ke hisab se */
+  box-sizing: border-box;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+  user-select: none;
+  z-index: 10;
+}
 #LoginSubmitBtn {
   position: relative;
-  overflow: hidden;
 }
 
 .btn-loading .btn-text {
@@ -183,9 +204,31 @@
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+/* Password toggle */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 45px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+
+  /* Loader on submit */
   const form = document.querySelector(".customer-login-form");
   const submitBtn = document.getElementById("LoginSubmitBtn");
 
@@ -195,5 +238,20 @@ document.addEventListener("DOMContentLoaded", function () {
       submitBtn.disabled = true;
     });
   }
+
+  /* Password hide / show */
+  document.querySelectorAll(".toggle-password").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const input = document.getElementById(btn.dataset.target);
+      if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "👁";
+      } else {
+        input.type = "password";
+        btn.textContent = "👁";
+      }
+    });
+  });
+
 });
 </script>
