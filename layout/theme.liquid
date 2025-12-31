@@ -474,8 +474,8 @@ document.addEventListener("DOMContentLoaded", function () {
             </svg>
   `;
 
-  const form = document.querySelectorAll(".customer-login-form-for-loader");
-  const submitBtn = document.querySelectorAll("LoginSubmitBtn");
+  const form = document.querySelector(".customer-login-form-for-loader");
+  const submitBtn = document.getElementById("LoginSubmitBtn");
 
   if (form && submitBtn) {
     form.addEventListener("submit", function () {
