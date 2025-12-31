@@ -100,7 +100,7 @@
       aria-hidden="true"
     >
       <p class="mt-8 mb-22 mx-0 text-center">{{ 'customer.login_page.create_account_info' | t }}</p>
-      {% form 'create_customer' %}
+      {% form 'create_customer' class: 'customer-login-form' %}
         {{ form.errors | default_errors }}
         <div class="first-name form-group mb-10">
           <input
