@@ -389,3 +389,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+ 
+  /* Loader on submit */
+  const form = document.querySelector(".customer-login-form");
+  const submitBtn = document.getElementById("LoginSubmitBtn");
+
+  if (form && submitBtn) {
+    form.addEventListener("submit", function () {
+      submitBtn.classList.add("btn-loading");
+      submitBtn.disabled = true;
+    });
+  }
+
+  /* Password hide / show */
+  document.querySelectorAll(".toggle-password").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const input = document.getElementById(btn.dataset.target);
+      if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "👁‍🗨";
+      } else {
+        input.type = "password";
+        btn.textContent = "👁";
+      }
+    });
+  });
+
+});
+</script>
