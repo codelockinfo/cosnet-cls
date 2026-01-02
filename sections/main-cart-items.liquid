@@ -709,7 +709,8 @@
                           id="address_province"
                           class="form-control"
                           name="address[province]"
-                          data-default="{{ form.province }}"
+                          {% comment %} data-default="{{ form.province }}" {% endcomment %}
+                           data-default="Gujrat"
                         ></select>
                         {% # theme-check-disable UndefinedObject %}
                       </div>
