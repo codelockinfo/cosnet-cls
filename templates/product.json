@@ -168,7 +168,7 @@
         "trust_badge_qKXhpg": {
           "type": "trust_badge",
           "settings": {
-            "message": "Guarantee Safe Checkout:",
+            "message": "",
             "image_width": 340
           }
         },
