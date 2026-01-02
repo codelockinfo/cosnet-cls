@@ -330,10 +330,13 @@
           "show_fake_order": false,
           "disable_mobile": false,
           "fake_product": [
-            "anime-t-shirt-printed-short-sleeve",
-            "balloon-sleeve-blouse-square-neck",
-            "basic-bright-green-rib-extreme-crop",
-            "braid-detailed-sleeveless-flow-top"
+            "10-niacinamide-with-1-zinc-pca",
+            "2-kojic-acid",
+            "02-salicylic-acid",
+            "hair-serum",
+            "ferulic-acid-vitamin-c-e",
+            "rice-water",
+            "15-l-ascorbic-acid-vitamin-c"
           ],
           "fake_user": "Jonson (California) | Tony (Texas) | Bruno (New York) | Eren (Ohio) | Lauren (Washington) | Flortino (California) | Blue (Ohio)",
           "text_verify": "Verify",
