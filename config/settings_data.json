@@ -340,7 +340,7 @@
           ],
           "fake_user": "Rakesh (Rajkot) | Amit (Vadodara) | Ketan (Bhavnagar) | Harsh (Jamnagar) | Pooja (Gandhinagar) | Mahesh (Anand) | Neha (Mehsana) | Darshan (Morbi) | Nidhi (Junagadh) | Pratik (Navsari) | Komal (Valsad)",
           "text_verify": "Verify",
-          "delay_time": "5000",
+          "delay_time": "50000",
           "display_time": "6000"
         }
       },
