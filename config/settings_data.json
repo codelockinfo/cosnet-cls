@@ -327,8 +327,8 @@
       "fake-order": {
         "type": "fake-order",
         "settings": {
-          "show_fake_order": false,
-          "disable_mobile": false,
+          "show_fake_order": true,
+          "disable_mobile": true,
           "fake_product": [
             "10-niacinamide-with-1-zinc-pca",
             "2-kojic-acid",
