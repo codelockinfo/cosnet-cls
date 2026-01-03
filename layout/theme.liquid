@@ -523,4 +523,95 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 });
+
+
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  let razorBuyNowIntent = false;
+
+  //Buy Now clicked
+  document.addEventListener('click', function (e) {
+    const buyNowBtn = e.target.closest('.js-buy-now-razor');
+    if (!buyNowBtn) return;
+
+    e.preventDefault();
+    razorBuyNowIntent = true;
+
+    // Submit SAME product form (adds product ONCE)
+    const productForm = buyNowBtn.closest('form[data-type="add-to-cart-form"]');
+    if (!productForm) {
+      return;
+    }
+    productForm.requestSubmit();
+  }, true);
+
+  // Listen for Shopify cart update
+  if (typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
+    subscribe(PUB_SUB_EVENTS.cartUpdate, () => {
+      if (!razorBuyNowIntent) return;
+
+      razorBuyNowIntent = false;
+      openMagicCheckout();
+    });
+  }
+
+  function openMagicCheckout() {
+    const payBtn = document.querySelector('.shopify-payment-button__button');
+
+    if (!payBtn) {
+      console.error('Shopify payment button not found');
+      return;
+    }
+
+    payBtn.dispatchEvent(new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    }));
+
+  }
+});
+</script>
+<script>
+document.addEventListener('click', function (e) {
+  const exitButton = e.target.closest('button[data-testid="confirm-positive"]');
+  if (!exitButton) return;
+
+  setTimeout(() => {
+    window.top.location.reload();
+  }, 300);
+});
+</script>
+
+<style>
+.button_buy-now-razorBuyNowIntent{
+  width:100%;
+  max-width: 100%;
+}
+.js-buy-now-razor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* space between text and icons */
+}
+
+.js-buy-now-razor .btn-label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.js-buy-now-razor .pay-opt-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.js-buy-now-razor .pay-opt-icon img {
+  display: block;
+  height: 20px; /* adjust if needed */
+  width: auto;
+}
+.sticky__item-info .button_buy-now-razorBuyNowIntent {
+  display: none !important;
+}
+</style>

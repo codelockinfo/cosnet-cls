@@ -152,7 +152,7 @@
                   {{- 'products.product.actions.wishlist.add' | t -}}
                 </span>
               </button-wishlist>
-            {% endif %}
+            {% endif %}    
             {% if show_compare == true %}
               {% assign action_when_click_added_compare = 'go_to_page' %}
               {% if compare == empty %}
@@ -175,6 +175,24 @@
                 </span>
               </button-compare>
             {% endif %}
+            <div class="button_buy-now button_buy-now-razorBuyNowIntent grow-1 skeleton-loading">
+            <button
+                 type="button"
+                 class="btn add-to-cart-button js-buy-now-razor btn-primary w-full product_submit_button"
+                 style="--btn-padding-x: 2.5rem;"
+                 {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+               >
+                 <span class="btn-label hidden-on-load">
+                   Buy Now
+                 </span>
+                 <span class="pay-opt-icon">
+                    <img src="https://cdn.gokwik.co/v4/images/upi-icons.svg" alt="Payment Icons" width="63" height="24" sizes="63.453125px">
+                    </span>
+                 <svg width="14" height="14" class="spin opacity-0 icon-load">
+                   <use href="#icon-load"></use>
+                 </svg>
+               </button>
+             </div>
             {%- if show_dynamic_checkout -%}
               {%- if settings.show_checkbox_in_product_page and type == 'single' or type == 'main_product' -%}
                 <terms-conditions
