@@ -574,14 +574,176 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <script>
-document.addEventListener('click', function (e) {
-  const exitButton = e.target.closest('button[data-testid="confirm-positive"]');
-  if (!exitButton) return;
-
-  setTimeout(() => {
-    window.top.location.reload();
-  }, 300);
-});
+// Reload page ONLY when Razorpay exit button is clicked - Works in all browsers including private/incognito
+(function() {
+  let razorpayOpen = false;
+  let checkInterval = null;
+  let razorpayWasVisible = false;
+  let lastRazorpayElements = null;
+  
+  // Function to check if Razorpay elements exist
+  function checkRazorpayElements() {
+    const razorpayIframe = document.querySelector('iframe[src*="razorpay"], iframe[src*="razorpay.com"]');
+    const razorpayModal = document.querySelector('[class*="razorpay"], [id*="razorpay"], [class*="Razorpay"]');
+    const razorpayOverlay = document.querySelector('.razorpay-overlay, .razorpay-modal');
+    const razorpayContainer = document.querySelector('[id*="razorpay"], [class*="razorpay-checkout"]');
+    
+    return {
+      iframe: razorpayIframe,
+      modal: razorpayModal,
+      overlay: razorpayOverlay,
+      container: razorpayContainer,
+      exists: !!(razorpayIframe || razorpayModal || razorpayOverlay || razorpayContainer)
+    };
+  }
+  
+  // Function to reload page
+  function reloadPage() {
+    try {
+      const currentUrl = window.location.href;
+      // Use location.reload() as fallback if href assignment fails
+      if (window.location.href !== currentUrl) {
+        window.location.href = currentUrl;
+      } else {
+        window.location.reload(true);
+      }
+    } catch (e) {
+      // Final fallback
+      window.location.reload(true);
+    }
+  }
+  
+  // Detect when Razorpay opens (when payment button is clicked)
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.shopify-payment-button__button') || 
+        e.target.closest('[data-shopify="payment-button"]') ||
+        e.target.closest('.razorpay-checkout-btn')) {
+      
+      // Wait to confirm Razorpay actually opened
+      setTimeout(function() {
+        const elements = checkRazorpayElements();
+        
+        // Only mark as open if Razorpay elements actually appeared
+        if (elements.exists) {
+          razorpayOpen = true;
+          razorpayWasVisible = true;
+          lastRazorpayElements = {
+            iframe: !!elements.iframe,
+            modal: !!elements.modal,
+            overlay: !!elements.overlay,
+            container: !!elements.container
+          };
+          
+          // Start checking if Razorpay popup/iframe is still open
+          if (checkInterval) clearInterval(checkInterval);
+          
+          checkInterval = setInterval(function() {
+            if (!razorpayOpen || !razorpayWasVisible) {
+              if (checkInterval) clearInterval(checkInterval);
+              return;
+            }
+            
+            // Check for Razorpay iframe or popup elements
+            const elements = checkRazorpayElements();
+            
+            // If Razorpay elements are gone AND it was visible before, it means exit button was clicked
+            if (!elements.exists && razorpayWasVisible) {
+              razorpayOpen = false;
+              razorpayWasVisible = false;
+              if (checkInterval) clearInterval(checkInterval);
+              
+              // Reload the site ONLY when Razorpay closes (exit button clicked)
+              reloadPage();
+            } else if (elements.exists) {
+              // Update last known state
+              lastRazorpayElements = {
+                iframe: !!elements.iframe,
+                modal: !!elements.modal,
+                overlay: !!elements.overlay,
+                container: !!elements.container
+              };
+            }
+          }, 300); // Check every 300ms (more frequent for better detection)
+          
+          // Safety: stop checking after 10 minutes
+          setTimeout(function() {
+            if (checkInterval) {
+              clearInterval(checkInterval);
+              razorpayOpen = false;
+              razorpayWasVisible = false;
+            }
+          }, 600000);
+        }
+      }, 1500); // Wait 1.5 seconds to confirm Razorpay opened
+    }
+  }, true);
+  
+  // Watch for iframe removal (when Razorpay iframe is removed = exit clicked)
+  // Use try-catch to handle cases where MutationObserver might not be available
+  try {
+    const iframeObserver = new MutationObserver(function(mutations) {
+      // ONLY reload if Razorpay was actually opened and visible
+      if (razorpayOpen && razorpayWasVisible) {
+        mutations.forEach(function(mutation) {
+          mutation.removedNodes.forEach(function(node) {
+            if (node.nodeType === 1 && node.tagName === 'IFRAME') {
+              const iframeSrc = (node.src || node.getAttribute('src') || '').toLowerCase();
+              if (iframeSrc.includes('razorpay') || iframeSrc.includes('razorpay.com')) {
+                // Razorpay iframe was removed = exit button clicked
+                razorpayOpen = false;
+                razorpayWasVisible = false;
+                if (checkInterval) clearInterval(checkInterval);
+                reloadPage();
+              }
+            }
+          });
+        });
+      }
+    });
+    
+    // Observe document body for changes
+    if (document.body) {
+      iframeObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    } else {
+      // If body not ready, wait for it
+      document.addEventListener('DOMContentLoaded', function() {
+        iframeObserver.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      });
+    }
+  } catch (e) {
+    // MutationObserver not supported, rely only on interval checking
+    console.warn('MutationObserver not available, using interval checking only');
+  }
+  
+  // Additional fallback: Watch for window focus (works in all browsers)
+  let wasBlurred = false;
+  window.addEventListener('blur', function() {
+    if (razorpayOpen && razorpayWasVisible) {
+      wasBlurred = true;
+    }
+  });
+  
+  window.addEventListener('focus', function() {
+    if (wasBlurred && razorpayOpen && razorpayWasVisible) {
+      setTimeout(function() {
+        const elements = checkRazorpayElements();
+        if (!elements.exists) {
+          razorpayOpen = false;
+          razorpayWasVisible = false;
+          if (checkInterval) clearInterval(checkInterval);
+          reloadPage();
+        }
+        wasBlurred = false;
+      }, 500);
+    }
+  });
+})();
 </script>
 
 <style>
